@@ -1,8 +1,10 @@
 #include <iostream>
 #include "AbonentList.h"
+#include "Interface.h"
 
-int main()
+void testAbonentList()
 {
+    std::cout << "=== Тестирование класса AbonentList ===\n";
     AbonentList list;
 
     //* Добавление записей
@@ -43,6 +45,59 @@ int main()
 
     std::cout << "\n=== После очистки ===\n";
     std::cout << "Количество записей: " << list.getAll().size() << '\n';
+}
+
+void testInterface()
+{
+    std::cout << "=== Тестирование класса Interface ===\n";
+    Interface ui;
+
+    // Попытка добавления записи с пустыми полями
+    if (!ui.addAbonent("", "123"))
+    {
+        std::cout << "Ошибка: пустое имя\n";
+    }
+
+    // Основной сценарий
+    ui.addAbonent("Ivan", "111");
+    ui.addAbonent("Ivan", "222");
+    ui.addAbonent("Anna", "999");
+
+    std::cout << "\n=== Все записи ===\n";
+    for (const auto &[name, phone] : ui.getAll())
+    {
+        std::cout << name << " : " << phone << '\n';
+    }
+
+    // Поиск
+    std::cout << "\n=== Поиск Ivan ===\n";
+    for (const auto &phone : ui.findAbonent("Ivan"))
+    {
+        std::cout << phone << '\n';
+    }
+
+    // Редактирование
+    ui.editAbonent("Anna", "000");
+
+    // Удаление
+    ui.removeAbonent("Ivan");
+
+    std::cout << "\n=== После изменения Anna и удаления Ivan ===\n";
+    for (const auto &[name, phone] : ui.getAll())
+    {
+        std::cout << name << " : " << phone << '\n';
+    }
+
+    // Очистка
+    ui.clear();
+    std::cout << "\nКоличество записей после очистки: "
+              << ui.getAll().size() << '\n';
+}
+
+int main()
+{
+    // testAbonentList();
+    testInterface();
 
     return 0;
 }
