@@ -94,10 +94,51 @@ void testInterface()
               << ui.getAll().size() << '\n';
 }
 
+void testFileManager()
+{
+    Interface ui;
+
+    ui.addAbonent("Ivan", "111");
+    ui.addAbonent("Anna", "999");
+
+    std::cout << "\n=== Все записи ===\n";
+    for (const auto &[name, phone] : ui.getAll())
+    {
+        std::cout << name << " : " << phone << '\n';
+    }
+
+    ui.save("book.txt");
+
+    ui.addAbonent("Jose", "228");
+
+    std::cout << "\n=== Все записи после редактирования ===\n";
+    for (const auto &[name, phone] : ui.getAll())
+    {
+        std::cout << name << " : " << phone << '\n';
+    }
+
+    ui.load("book.txt");
+
+    std::cout << "\n=== Все записи после загрузки ===\n";
+    for (const auto &[name, phone] : ui.getAll())
+    {
+        std::cout << name << " : " << phone << '\n';
+    }
+}
+
+void testHelp()
+{
+    Interface ui;
+
+    std::cout << ui.info();
+}
+
 int main()
 {
     // testAbonentList();
-    testInterface();
+    // testInterface();
+    // testFileManager();
+    testHelp();
 
     return 0;
 }

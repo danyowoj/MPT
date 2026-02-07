@@ -14,6 +14,9 @@ public:
     std::vector<std::string> findAbonent(const std::string &name) const;
     void clear();
     const std::multimap<std::string, std::string> &getAll() const;
+    bool save(const std::string &filename);
+    bool load(const std::string &filename);
+    std::string info() const;
 
 private:
     AbonentList list;

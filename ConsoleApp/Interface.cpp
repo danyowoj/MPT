@@ -1,4 +1,6 @@
 #include "Interface.h"
+#include "FileManager.h"
+#include "Help.h"
 
 //* Сценарий "Добавить"
 bool Interface::addAbonent(const std::string &name, const std::string &phone)
@@ -55,4 +57,32 @@ void Interface::clear()
 const std::multimap<std::string, std::string> &Interface::getAll() const
 {
     return list.getAll();
+}
+
+//* Сохранение
+bool Interface::save(const std::string &filename)
+{
+    if (filename.empty())
+    {
+        return false;
+    }
+
+    return FileManager::saveToFile(list, filename);
+}
+
+//* Загрузка
+bool Interface::load(const std::string &filename)
+{
+    if (filename.empty())
+    {
+        return false;
+    }
+
+    return FileManager::loadFromFile(list, filename);
+}
+
+//* Информация
+std::string Interface::info() const
+{
+    return Help::getInfo();
 }
