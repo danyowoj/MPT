@@ -1,8 +1,8 @@
-#include "convert_10p.h"
+#include "Convert_10p.h"
 #include <algorithm>
 #include <cmath>
 
-char convert_10p::intToChar(int n)
+char Convert_10p::intToChar(int n)
 {
     if (n >= 0 && n <= 9)
         return static_cast<char>('0' + n);
@@ -13,7 +13,7 @@ char convert_10p::intToChar(int n)
     return '?'; // защита
 }
 
-std::string convert_10p::intToP(long long value, int p)
+std::string Convert_10p::intToP(long long value, int p)
 {
     if (value == 0)
         return "0";
@@ -31,7 +31,7 @@ std::string convert_10p::intToP(long long value, int p)
     return result;
 }
 
-std::string convert_10p::fltToP(double frac, int p, int precision)
+std::string Convert_10p::fltToP(double frac, int p, int precision)
 {
     std::string result;
 
@@ -46,7 +46,7 @@ std::string convert_10p::fltToP(double frac, int p, int precision)
     return result;
 }
 
-std::string convert_10p::Do(double value, int p, int precision)
+std::string Convert_10p::Do(double value, int p, int precision)
 {
     if (p < 2 || p > 16 || precision < 0)
         return "0";

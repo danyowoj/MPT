@@ -1,6 +1,6 @@
-#include "convert_p10.h"
+#include "Convert_p10.h"
 
-int convert_p10::charToNum(char ch)
+int Convert_p10::charToNum(char ch)
 {
     if (ch >= '0' && ch <= '9')
         return ch - '0';
@@ -15,7 +15,7 @@ int convert_p10::charToNum(char ch)
     return -1;
 }
 
-double convert_p10::convert(const std::string &digits, int p, double weight)
+double Convert_p10::convert(const std::string &digits, int p, double weight)
 {
     double result = 0.0;
 
@@ -32,7 +32,7 @@ double convert_p10::convert(const std::string &digits, int p, double weight)
     return result;
 }
 
-double convert_p10::Do(const std::string &p_num, int p)
+double Convert_p10::Do(const std::string &p_num, int p)
 {
     if (p < 2 || p > 16 || p_num.empty())
         return 0.0;

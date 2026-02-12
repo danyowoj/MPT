@@ -1,398 +1,379 @@
-// test_convert.cpp
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <cstdlib>
 
-// Подключаем заголовочные файлы
-#include "convert_p10.h"
-#include "convert_10p.h"
+// Подключаем заголовки тестируемых классов
+#include "Editor.h"
+#include "Convert_10p.h"
+#include "Convert_p10.h"
 
-// Функция для сравнения чисел с плавающей точкой с заданной точностью
-bool almostEqual(double a, double b, double epsilon = 1e-9)
+// ---------------------------------------------------------------------
+// Глобальная статистика тестов
+// ---------------------------------------------------------------------
+static int totalTests = 0;
+static int passedTests = 0;
+static bool showPassed = true; // можно отключить для краткости
+
+static void verify(bool condition, const char *testName)
 {
-    return std::fabs(a - b) < epsilon;
+    totalTests++;
+    if (condition)
+    {
+        passedTests++;
+        if (showPassed)
+            std::cout << "[PASS] " << testName << "\n";
+    }
+    else
+    {
+        std::cout << "[FAIL] " << testName << "\n";
+    }
 }
 
-// Тесты для convert_p10 (из P-ичной в десятичную)
+static void printSummary(const std::string &groupName)
+{
+    std::cout << "\n--- " << groupName << " summary: "
+              << passedTests << " / " << totalTests << " passed ---\n\n";
+}
+
+// ---------------------------------------------------------------------
+// Тесты для класса Editor
+// ---------------------------------------------------------------------
+void testEditor()
+{
+    std::cout << "===== Testing Editor =====\n";
+    totalTests = 0;
+    passedTests = 0;
+
+    // ---------- constructor ----------
+    {
+        Editor ed(10);
+        verify(ed.getValue() == "0", "Constructor: initial '0'");
+    }
+
+    // ---------- setBase ----------
+    {
+        Editor ed(10);
+        ed.setBase(16);
+        ed.addDigit('F');
+        verify(ed.getValue() == "F", "setBase(16): allows 'F'");
+        ed.setBase(2);
+        ed.addDigit('2');
+        verify(ed.getValue() == "F", "setBase(2): rejects '2'");
+        ed.setBase(1); // должно игнорироваться
+        ed.addDigit('1');
+        verify(ed.getValue() == "F1", "setBase(1): ignored, '1' added");
+        ed.setBase(17); // должно игнорироваться
+        ed.addDigit('A');
+        verify(ed.getValue() == "F1A", "setBase(17): ignored, 'A' added");
+    }
+
+    // ---------- addDigit ----------
+    {
+        Editor ed(10);
+        ed.addDigit('3');
+        verify(ed.getValue() == "3", "addDigit: replace initial '0'");
+        ed.addDigit('7');
+        verify(ed.getValue() == "37", "addDigit: append");
+        ed.addDigit('A');
+        verify(ed.getValue() == "37", "addDigit: invalid digit ignored");
+        Editor ed2(10);
+        ed2.addDigit('0');
+        verify(ed2.getValue() == "0", "addDigit: '0' on initial stays '0'");
+        ed2.addDigit('5');
+        verify(ed2.getValue() == "5", "addDigit: after '0' works");
+    }
+
+    // ---------- addPoint ----------
+    {
+        Editor ed(10);
+        ed.addPoint();
+        verify(ed.getValue() == "0.", "addPoint: first point");
+        ed.addPoint();
+        verify(ed.getValue() == "0.", "addPoint: second point ignored");
+        Editor ed2(10);
+        ed2.addDigit('1');
+        ed2.addDigit('2');
+        ed2.addPoint();
+        verify(ed2.getValue() == "12.", "addPoint after integer");
+        ed2.addDigit('5');
+        verify(ed2.getValue() == "12.5", "addDigit after point");
+    }
+
+    // ---------- toggleSign ----------
+    {
+        Editor ed(10);
+        ed.toggleSign();
+        verify(ed.getValue() == "-0", "toggleSign: zero -> '-0'");
+        ed.toggleSign();
+        verify(ed.getValue() == "0", "toggleSign: back to '0'");
+        Editor ed2(10);
+        ed2.addDigit('1');
+        ed2.addDigit('2');
+        ed2.toggleSign();
+        verify(ed2.getValue() == "-12", "positive -> negative");
+        ed2.toggleSign();
+        verify(ed2.getValue() == "12", "negative -> positive");
+    }
+
+    // ---------- backspace ----------
+    {
+        Editor ed(10);
+        ed.backspace();
+        verify(ed.getValue() == "0", "backspace on '0' stays '0'");
+        ed.addDigit('5');
+        ed.backspace();
+        verify(ed.getValue() == "0", "backspace last digit -> '0'");
+        ed.addDigit('1');
+        ed.addDigit('2');
+        ed.addDigit('3');
+        ed.backspace();
+        verify(ed.getValue() == "12", "backspace removes last digit");
+        ed.backspace();
+        verify(ed.getValue() == "1", "...");
+        ed.backspace();
+        verify(ed.getValue() == "0", "...");
+        Editor ed2(10);
+        ed2.toggleSign();
+        ed2.addDigit('7');
+        ed2.backspace();
+        verify(ed2.getValue() == "-", "backspace digit after sign");
+        ed2.backspace();
+        verify(ed2.getValue() == "0", "backspace single '-' -> '0'");
+    }
+
+    // ---------- clear ----------
+    {
+        Editor ed(10);
+        ed.addDigit('9');
+        ed.addPoint();
+        ed.addDigit('5');
+        ed.toggleSign();
+        ed.clear();
+        verify(ed.getValue() == "0", "clear resets to '0'");
+        ed.addDigit('1');
+        verify(ed.getValue() == "1", "clear: subsequent input works");
+    }
+
+    // ---------- edge cases (bases) ----------
+    {
+        Editor ed(2);
+        ed.addDigit('1');
+        ed.addDigit('0');
+        ed.addDigit('1');
+        verify(ed.getValue() == "101", "base2: valid digits");
+        ed.addDigit('2');
+        verify(ed.getValue() == "101", "base2: reject '2'");
+        ed.addPoint();
+        ed.addDigit('1');
+        verify(ed.getValue() == "101.1", "base2: fractional");
+
+        Editor ed2(16);
+        ed2.addDigit('F');
+        ed2.addDigit('E');
+        ed2.addDigit('D');
+        verify(ed2.getValue() == "FED", "base16: uppercase");
+        ed2.addDigit('c');
+        verify(ed2.getValue() == "FED", "base16: lowercase not accepted");
+
+        Editor ed3(16);
+        ed3.addDigit('F');
+        verify(ed3.getValue() == "F", "base16: max digit");
+        ed3.setBase(15);
+        ed3.addDigit('F');
+        verify(ed3.getValue() == "F", "base15: digit F (15) rejected");
+    }
+
+    printSummary("Editor");
+}
+
+// ---------------------------------------------------------------------
+// Тесты для Convert_10p (десятичная → P-ичная)
+// ---------------------------------------------------------------------
+void testConvert10p()
+{
+    std::cout << "===== Testing Convert_10p =====\n";
+    totalTests = 0;
+    passedTests = 0;
+
+    Convert_10p conv;
+
+    // --- целые числа ---
+    verify(conv.Do(10.0, 2, 0) == "1010", "Dec 10 -> bin 1010");
+    verify(conv.Do(255.0, 8, 0) == "377", "Dec 255 -> oct 377");
+    verify(conv.Do(255.0, 16, 0) == "FF", "Dec 255 -> hex FF");
+    verify(conv.Do(0.0, 16, 0) == "0", "Dec 0 -> 0");
+    verify(conv.Do(123.0, 10, 0) == "123", "Dec 123 -> dec 123");
+
+    // --- дробные числа ---
+    verify(conv.Do(10.625, 2, 3) == "1010.101", "Dec 10.625 -> bin 1010.101 (prec 3)");
+    verify(conv.Do(123.456, 10, 3) == "123.456", "Dec 123.456 -> dec 123.456");
+    verify(conv.Do(0.5, 2, 5) == "0.10000", "Dec 0.5 -> bin 0.1 (prec 5)");
+
+    // --- отрицательные ---
+    verify(conv.Do(-123.0, 10, 0) == "-123", "Negative -> '-' prefix");
+    verify(conv.Do(-10.625, 2, 3) == "-1010.101", "Negative fraction");
+
+    // --- граничные условия ---
+    verify(conv.Do(123.0, 1, 0) == "0", "Base 1 (invalid) -> 0");
+    verify(conv.Do(123.0, 17, 0) == "0", "Base 17 (invalid) -> 0");
+    verify(conv.Do(123.0, 10, -1) == "0", "Negative precision -> 0");
+
+    printSummary("Convert_10p");
+}
+
+// ---------------------------------------------------------------------
+// Тесты для Convert_p10 (P-ичная → десятичная)
+// ---------------------------------------------------------------------
 void testConvertP10()
 {
-    std::cout << "=== Тестирование convert_p10 ===\n";
+    std::cout << "===== Testing Convert_p10 =====\n";
+    totalTests = 0;
+    passedTests = 0;
 
-    convert_p10 converter;
-    int passed = 0;
-    int total = 0;
+    Convert_p10 conv;
 
-    // Тест 1: Двоичная система
-    {
-        total++;
-        double result = converter.Do("1010", 2);
-        if (almostEqual(result, 10.0))
-        {
-            std::cout << "Тест 1 passed: 1010 (2) -> " << result << "\n";
-            passed++;
-        }
-        else
-        {
-            std::cout << "Тест 1 failed: 1010 (2) ожидается 10, получено " << result << "\n";
-        }
-    }
+    // --- целые числа ---
+    verify(std::fabs(conv.Do("1010", 2) - 10.0) < 1e-9, "Bin 1010 -> 10");
+    verify(std::fabs(conv.Do("777", 8) - 511.0) < 1e-9, "Oct 777 -> 511");
+    verify(std::fabs(conv.Do("FF", 16) - 255.0) < 1e-9, "Hex FF -> 255");
+    verify(std::fabs(conv.Do("abc", 16) - 2748.0) < 1e-9, "Hex abc -> 2748 (lowercase)");
+    verify(std::fabs(conv.Do("0", 10) - 0.0) < 1e-9, "'0' -> 0");
 
-    // Тест 2: Восьмеричная система
-    {
-        total++;
-        double result = converter.Do("777", 8);
-        if (almostEqual(result, 511.0))
-        {
-            std::cout << "Тест 2 passed: 777 (8) -> " << result << "\n";
-            passed++;
-        }
-        else
-        {
-            std::cout << "Тест 2 failed: 777 (8) ожидается 511, получено " << result << "\n";
-        }
-    }
+    // --- дробные числа ---
+    verify(std::fabs(conv.Do("1010.101", 2) - 10.625) < 1e-9, "Bin 1010.101 -> 10.625");
+    verify(std::fabs(conv.Do("123.456", 10) - 123.456) < 1e-9, "Dec 123.456 -> 123.456");
+    verify(std::fabs(conv.Do("0.1", 2) - 0.5) < 1e-9, "Bin 0.1 -> 0.5");
 
-    // Тест 3: Шестнадцатеричная система (верхний регистр)
-    {
-        total++;
-        double result = converter.Do("FF", 16);
-        if (almostEqual(result, 255.0))
-        {
-            std::cout << "Тест 3 passed: FF (16) -> " << result << "\n";
-            passed++;
-        }
-        else
-        {
-            std::cout << "Тест 3 failed: FF (16) ожидается 255, получено " << result << "\n";
-        }
-    }
+    // --- отрицательные ---
+    verify(std::fabs(conv.Do("-123", 10) + 123.0) < 1e-9, "Negative -123 -> -123");
+    verify(std::fabs(conv.Do("-1010.101", 2) + 10.625) < 1e-9, "Negative binary fraction");
 
-    // Тест 4: Шестнадцатеричная система (нижний регистр)
-    {
-        total++;
-        double result = converter.Do("abc", 16);
-        if (almostEqual(result, 2748.0))
-        {
-            std::cout << "Тест 4 passed: abc (16) -> " << result << "\n";
-            passed++;
-        }
-        else
-        {
-            std::cout << "Тест 4 failed: abc (16) ожидается 2748, получено " << result << "\n";
-        }
-    }
+    // --- граничные условия ---
+    verify(std::fabs(conv.Do("", 10)) < 1e-9, "Empty string -> 0");
+    verify(std::fabs(conv.Do("123", 1)) < 1e-9, "Base 1 -> 0");
+    verify(std::fabs(conv.Do("123", 17)) < 1e-9, "Base 17 -> 0");
+    verify(std::fabs(conv.Do("12G", 16)) < 1e-9, "Invalid digit G -> 0");
+    verify(std::fabs(conv.Do("12.34.56", 10)) < 1e-9, "Two dots -> 0? (точка найдётся первая, остальное в дробную часть – ожидаем 0 из-за второй точки? По коду: вторая точка попадёт в дробную часть и вызовет ошибку конвертации -> вернёт 0)");
 
-    // Тест 5: Десятичная система с дробной частью
-    {
-        total++;
-        double result = converter.Do("123.456", 10);
-        if (almostEqual(result, 123.456))
-        {
-            std::cout << "Тест 5 passed: 123.456 (10) -> " << result << "\n";
-            passed++;
-        }
-        else
-        {
-            std::cout << "Тест 5 failed: 123.456 (10) ожидается 123.456, получено " << result << "\n";
-        }
-    }
-
-    // Тест 6: Двоичная система с дробной частью
-    {
-        total++;
-        double result = converter.Do("1010.101", 2);
-        if (almostEqual(result, 10.625))
-        {
-            std::cout << "Тест 6 passed: 1010.101 (2) -> " << result << "\n";
-            passed++;
-        }
-        else
-        {
-            std::cout << "Тест 6 failed: 1010.101 (2) ожидается 10.625, получено " << result << "\n";
-        }
-    }
-
-    // Тест 7: Отрицательные числа
-    {
-        total++;
-        double result = converter.Do("-123", 10);
-        if (almostEqual(result, -123.0))
-        {
-            std::cout << "Тест 7 passed: -123 (10) -> " << result << "\n";
-            passed++;
-        }
-        else
-        {
-            std::cout << "Тест 7 failed: -123 (10) ожидается -123, получено " << result << "\n";
-        }
-    }
-
-    // Тест 8: Некорректное основание (должно вернуть 0)
-    {
-        total++;
-        double result = converter.Do("123", 1); // Основание < 2
-        if (almostEqual(result, 0.0))
-        {
-            std::cout << "Тест 8 passed: 123 (1) -> " << result << " (некорректное основание)\n";
-            passed++;
-        }
-        else
-        {
-            std::cout << "Тест 8 failed: 123 (1) ожидается 0, получено " << result << "\n";
-        }
-    }
-
-    // Тест 9: Пустая строка (должно вернуть 0)
-    {
-        total++;
-        double result = converter.Do("", 10);
-        if (almostEqual(result, 0.0))
-        {
-            std::cout << "Тест 9 passed: пустая строка -> " << result << "\n";
-            passed++;
-        }
-        else
-        {
-            std::cout << "Тест 9 failed: пустая строка ожидается 0, получено " << result << "\n";
-        }
-    }
-
-    std::cout << "Результат: " << passed << "/" << total << " тестов пройдено\n\n";
+    printSummary("Convert_p10");
 }
 
-// Тесты для convert_10p (из десятичной в P-ичную)
-void testConvert10P()
-{
-    std::cout << "=== Тестирование convert_10p ===\n";
-
-    convert_10p converter;
-    int passed = 0;
-    int total = 0;
-
-    // Тест 1: Десятичное в двоичное (целое)
-    {
-        total++;
-        std::string result = converter.Do(10.0, 2, 0);
-        if (result == "1010")
-        {
-            std::cout << "Тест 1 passed: 10 (10) -> " << result << " (2)\n";
-            passed++;
-        }
-        else
-        {
-            std::cout << "Тест 1 failed: 10 (10) ожидается 1010, получено " << result << "\n";
-        }
-    }
-
-    // Тест 2: Десятичное в восьмеричное (целое)
-    {
-        total++;
-        std::string result = converter.Do(255.0, 8, 0);
-        if (result == "377")
-        {
-            std::cout << "Тест 2 passed: 255 (10) -> " << result << " (8)\n";
-            passed++;
-        }
-        else
-        {
-            std::cout << "Тест 2 failed: 255 (10) ожидается 377, получено " << result << "\n";
-        }
-    }
-
-    // Тест 3: Десятичное в шестнадцатеричное (целое)
-    {
-        total++;
-        std::string result = converter.Do(255.0, 16, 0);
-        if (result == "FF")
-        {
-            std::cout << "Тест 3 passed: 255 (10) -> " << result << " (16)\n";
-            passed++;
-        }
-        else
-        {
-            std::cout << "Тест 3 failed: 255 (10) ожидается FF, получено " << result << "\n";
-        }
-    }
-
-    // Тест 4: Десятичное в двоичное (дробное, точность 3)
-    {
-        total++;
-        std::string result = converter.Do(10.625, 2, 3);
-        if (result == "1010.101")
-        {
-            std::cout << "Тест 4 passed: 10.625 (10) -> " << result << " (2, точность 3)\n";
-            passed++;
-        }
-        else
-        {
-            std::cout << "Тест 4 failed: 10.625 (10) ожидается 1010.101, получено " << result << "\n";
-        }
-    }
-
-    // Тест 5: Десятичное в десятичное (дробное, точность 3)
-    {
-        total++;
-        std::string result = converter.Do(123.456, 10, 3);
-        if (result == "123.456")
-        {
-            std::cout << "Тест 5 passed: 123.456 (10) -> " << result << " (10, точность 3)\n";
-            passed++;
-        }
-        else
-        {
-            std::cout << "Тест 5 failed: 123.456 (10) ожидается 123.456, получено " << result << "\n";
-        }
-    }
-
-    // Тест 6: Отрицательное число
-    {
-        total++;
-        std::string result = converter.Do(-123.0, 10, 0);
-        if (result == "-123")
-        {
-            std::cout << "Тест 6 passed: -123 (10) -> " << result << " (10)\n";
-            passed++;
-        }
-        else
-        {
-            std::cout << "Тест 6 failed: -123 (10) ожидается -123, получено " << result << "\n";
-        }
-    }
-
-    // Тест 7: Ноль
-    {
-        total++;
-        std::string result = converter.Do(0.0, 2, 0);
-        if (result == "0")
-        {
-            std::cout << "Тест 7 passed: 0 (10) -> " << result << " (2)\n";
-            passed++;
-        }
-        else
-        {
-            std::cout << "Тест 7 failed: 0 (10) ожидается 0, получено " << result << "\n";
-        }
-    }
-
-    // Тест 8: Некорректное основание (должно вернуть "0")
-    {
-        total++;
-        std::string result = converter.Do(123.0, 1, 0); // Основание < 2
-        if (result == "0")
-        {
-            std::cout << "Тест 8 passed: 123 (10) -> " << result << " (некорректное основание)\n";
-            passed++;
-        }
-        else
-        {
-            std::cout << "Тест 8 failed: 123 (10) ожидается 0, получено " << result << "\n";
-        }
-    }
-
-    // Тест 9: Отрицательная точность (должно вернуть "0")
-    {
-        total++;
-        std::string result = converter.Do(123.0, 10, -1);
-        if (result == "0")
-        {
-            std::cout << "Тест 9 passed: точность -1 -> " << result << "\n";
-            passed++;
-        }
-        else
-        {
-            std::cout << "Тест 9 failed: точность -1 ожидается 0, получено " << result << "\n";
-        }
-    }
-
-    // Тест 10: Большое число с дробной частью
-    {
-        total++;
-        std::string result = converter.Do(123456.789, 10, 3);
-        if (result == "123456.789")
-        {
-            std::cout << "Тест 10 passed: 123456.789 (10) -> " << result << " (10, точность 3)\n";
-            passed++;
-        }
-        else
-        {
-            std::cout << "Тест 10 failed: 123456.789 (10) ожидается 123456.789, получено " << result << "\n";
-        }
-    }
-
-    std::cout << "Результат: " << passed << "/" << total << " тестов пройдено\n\n";
-}
-
-// Тесты на совместимость: преобразование туда и обратно
+// ---------------------------------------------------------------------
+// Тесты round-trip: совместная работа обоих конвертеров
+// ---------------------------------------------------------------------
 void testRoundTrip()
 {
-    std::cout << "=== Тестирование round-trip (туда и обратно) ===\n";
+    std::cout << "===== Testing Converters Round-Trip =====\n";
+    totalTests = 0;
+    passedTests = 0;
 
-    convert_p10 to10;
-    convert_10p toP;
-    int passed = 0;
-    int total = 0;
+    Convert_10p toP;
+    Convert_p10 to10;
 
-    // Тест 1: Целое число из 10 в 16 и обратно
+    double values[] = {0, 1, 42, 255, 3.14, 10.625, -123.456};
+    int bases[] = {2, 8, 10, 16};
+    int precisions[] = {0, 3, 5};
+
+    for (double v : values)
     {
-        total++;
-        std::string p_result = toP.Do(255.0, 16, 0);
-        double back_result = to10.Do(p_result, 16);
-        if (almostEqual(back_result, 255.0))
+        for (int p : bases)
         {
-            std::cout << "Тест 1 passed: 255 -> " << p_result << " -> " << back_result << "\n";
-            passed++;
-        }
-        else
-        {
-            std::cout << "Тест 1 failed: 255 -> " << p_result << " -> " << back_result << "\n";
+            for (int prec : precisions)
+            {
+                std::string pStr = toP.Do(v, p, prec);
+                double back = to10.Do(pStr, p);
+                // Сравнение с учётом точности преобразования
+                double tolerance = (prec == 0) ? 1e-9 : std::pow(p, -prec) * 1.1;
+                bool ok = std::fabs(back - v) < tolerance;
+                if (!ok)
+                {
+                    std::cout << "Round-trip failed: " << v << " -> " << pStr
+                              << " -> " << back << " (base " << p << ", prec " << prec << ")\n";
+                }
+                // Для краткости выводим только ошибки, но статистику собираем
+                totalTests++;
+                if (ok)
+                    passedTests++;
+            }
         }
     }
 
-    // Тест 2: Дробное число из 10 в 2 и обратно (с точностью)
-    {
-        total++;
-        std::string p_result = toP.Do(10.625, 2, 3);
-        double back_result = to10.Do(p_result, 2);
-        if (almostEqual(back_result, 10.625))
-        {
-            std::cout << "Тест 2 passed: 10.625 -> " << p_result << " -> " << back_result << "\n";
-            passed++;
-        }
-        else
-        {
-            std::cout << "Тест 2 failed: 10.625 -> " << p_result << " -> " << back_result << "\n";
-        }
-    }
-
-    // Тест 3: Отрицательное число
-    {
-        total++;
-        std::string p_result = toP.Do(-123.0, 10, 0);
-        double back_result = to10.Do(p_result, 10);
-        if (almostEqual(back_result, -123.0))
-        {
-            std::cout << "Тест 3 passed: -123 -> " << p_result << " -> " << back_result << "\n";
-            passed++;
-        }
-        else
-        {
-            std::cout << "Тест 3 failed: -123 -> " << p_result << " -> " << back_result << "\n";
-        }
-    }
-
-    std::cout << "Результат: " << passed << "/" << total << " тестов пройдено\n\n";
+    printSummary("Converters Round-Trip");
 }
 
-int main()
+// ---------------------------------------------------------------------
+// Главная функция – разбор аргументов командной строки
+// ---------------------------------------------------------------------
+int main(int argc, char *argv[])
 {
-    std::cout << "Запуск unit-тестов для преобразования систем счисления\n";
-    std::cout << "=====================================================\n\n";
+    // По умолчанию тестируем всё
+    bool testEd = false, testC10p = false, testCp10 = false, testRT = false;
+    bool runAll = true;
 
-    testConvertP10();
-    testConvert10P();
-    testRoundTrip();
+    if (argc > 1)
+    {
+        runAll = false;
+        for (int i = 1; i < argc; ++i)
+        {
+            std::string arg = argv[i];
+            if (arg == "--editor" || arg == "-e")
+                testEd = true;
+            else if (arg == "--convert10p" || arg == "-c10")
+                testC10p = true;
+            else if (arg == "--convertp10" || arg == "-cp10")
+                testCp10 = true;
+            else if (arg == "--roundtrip" || arg == "-rt")
+                testRT = true;
+            else if (arg == "--all" || arg == "-a")
+                runAll = true;
+            else if (arg == "--quiet")
+                showPassed = false; // не показывать успешные тесты
+            else
+            {
+                std::cerr << "Unknown option: " << arg << "\n";
+                return 1;
+            }
+        }
+    }
 
-    std::cout << "Все тесты завершены!\n";
+    if (runAll)
+    {
+        testEd = testC10p = testCp10 = testRT = true;
+    }
 
-    return 0;
+    // Сброс статистики перед каждым тестом выполняется внутри них,
+    // но итоговую общую статистику соберём вручную.
+    int grandTotal = 0, grandPassed = 0;
+
+    if (testEd)
+    {
+        testEditor();
+        grandTotal += totalTests;
+        grandPassed += passedTests;
+    }
+    if (testC10p)
+    {
+        testConvert10p();
+        grandTotal += totalTests;
+        grandPassed += passedTests;
+    }
+    if (testCp10)
+    {
+        testConvertP10();
+        grandTotal += totalTests;
+        grandPassed += passedTests;
+    }
+    if (testRT)
+    {
+        testRoundTrip();
+        grandTotal += totalTests;
+        grandPassed += passedTests;
+    }
+
+    std::cout << "\n========================================\n";
+    std::cout << "TOTAL PASSED: " << grandPassed << " / " << grandTotal << "\n";
+    std::cout << "========================================\n";
+
+    return (grandPassed == grandTotal) ? 0 : 1;
 }

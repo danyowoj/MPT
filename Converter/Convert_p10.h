@@ -2,7 +2,7 @@
 
 #include <string>
 
-class convert_p10
+class Convert_p10
 {
 public:
     // Преобразовать число из системы счисления с основанием p в double

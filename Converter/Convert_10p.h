@@ -2,7 +2,7 @@
 
 #include <string>
 
-class convert_10p
+class Convert_10p
 {
 public:
     // Перевод десятичного числа в систему счисления p
