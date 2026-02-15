@@ -1,63 +1,83 @@
 #include "Editor.h"
+#include <algorithm>
 
-Editor::Editor(int base) : base(base), value("0") {}
+const std::string Editor::ZERO = "0";
 
-void Editor::setBase(int p)
+Editor::Editor() : number(ZERO) {}
+
+std::string Editor::getNumber() const { return number.empty() ? ZERO : number; }
+
+void Editor::addDigit(int digit)
 {
-    if (p >= 2 && p <= 16)
-        base = p;
-}
-
-bool Editor::isValidDigit(char c) const
-{
-    if (c >= '0' && c <= '9')
-        return (c - '0') < base;
-
-    if (c >= 'A' && c <= 'F')
-        return (c - 'A' + 10) < base;
-
-    return false;
-}
-
-void Editor::addDigit(char c)
-{
-    if (!isValidDigit(c))
+    if (digit < 0 || digit > 15)
         return;
 
-    if (value == "0")
-        value = "";
+    char ch = digitToChar(digit);
 
-    value += c;
-}
-
-void Editor::addPoint()
-{
-    if (value.find('.') == std::string::npos)
-        value += '.';
-}
-
-void Editor::toggleSign()
-{
-    if (value[0] == '-')
-        value.erase(0, 1);
+    // Если текущее число "0" и добавляется не ноль – заменить "0" на цифру
+    if (number == ZERO && digit != 0)
+        number = std::string(1, ch);
     else
-        value = "-" + value;
+        number.push_back(ch);
+}
+
+void Editor::addZero() { addDigit(0); }
+
+void Editor::addDelim()
+{
+    if (hasDelim())
+        return;
+
+    // Если число пусто или "0", добавляем "0."
+    if (number.empty() || number == ZERO)
+        number = "0" + std::string(1, DELIM);
+    else
+        number.push_back(DELIM);
 }
 
 void Editor::backspace()
 {
-    if (value.length() <= 1)
-    {
-        value = "0";
+    if (number.empty())
         return;
-    }
 
-    value.pop_back();
+    number.pop_back();
 
-    if (value == "-" || value.empty())
-        value = "0";
+    // После удаления пустая строка заменяется на "0"
+    if (number.empty())
+        number = ZERO;
 }
 
-void Editor::clear() { value = "0"; }
+void Editor::clear() { number = ZERO; }
 
-std::string Editor::getValue() const { return value; }
+int Editor::accuracy() const
+{
+    size_t dotPos = number.find(DELIM);
+    if (dotPos == std::string::npos)
+        return 0;
+    return static_cast<int>(number.length() - dotPos - 1);
+}
+
+std::string Editor::doCommand(int cmd)
+{
+    if (cmd >= 0 && cmd <= 15)
+        addDigit(cmd);
+    else if (cmd == 16)
+        addDelim();
+    else if (cmd == 17)
+        backspace();
+    else if (cmd == 18)
+        clear();
+
+    return getNumber();
+}
+
+bool Editor::hasDelim() const { return number.find(DELIM) != std::string::npos; }
+
+char Editor::digitToChar(int digit) const
+{
+    if (digit >= 0 && digit <= 9)
+        return static_cast<char>('0' + digit);
+    if (digit >= 10 && digit <= 15)
+        return static_cast<char>('A' + (digit - 10));
+    return '0';
+}
