@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-30aaff39e7d23e56759d.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "ConverterQt",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ConverterQt::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ConverterQt-Debug-0c9d84c5ea3ff13d8821.json",
+					"name" : "ConverterQt",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ConverterQt_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ConverterQt_autogen-Debug-d48eceea341b4de45d3f.json",
+					"name" : "ConverterQt_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ConverterQt_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ConverterQt_autogen_timestamp_deps-Debug-1ab20cce04c7b7f38088.json",
+					"name" : "ConverterQt_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/danyowoj/Documents/GitHub/C4S2/MPT/ConverterQt/build/Desktop-Debug",
+		"source" : "/home/danyowoj/Documents/GitHub/C4S2/MPT/ConverterQt"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

@@ -1,0 +1,9 @@
+/home/danyowoj/Documents/GitHub/C4S2/MPT/ConverterQt/build/Desktop-Debug/CMakeFiles/ConverterQt.dir
+/home/danyowoj/Documents/GitHub/C4S2/MPT/ConverterQt/build/Desktop-Debug/CMakeFiles/edit_cache.dir
+/home/danyowoj/Documents/GitHub/C4S2/MPT/ConverterQt/build/Desktop-Debug/CMakeFiles/rebuild_cache.dir
+/home/danyowoj/Documents/GitHub/C4S2/MPT/ConverterQt/build/Desktop-Debug/CMakeFiles/list_install_components.dir
+/home/danyowoj/Documents/GitHub/C4S2/MPT/ConverterQt/build/Desktop-Debug/CMakeFiles/install.dir
+/home/danyowoj/Documents/GitHub/C4S2/MPT/ConverterQt/build/Desktop-Debug/CMakeFiles/install/local.dir
+/home/danyowoj/Documents/GitHub/C4S2/MPT/ConverterQt/build/Desktop-Debug/CMakeFiles/install/strip.dir
+/home/danyowoj/Documents/GitHub/C4S2/MPT/ConverterQt/build/Desktop-Debug/CMakeFiles/ConverterQt_autogen_timestamp_deps.dir
+/home/danyowoj/Documents/GitHub/C4S2/MPT/ConverterQt/build/Desktop-Debug/CMakeFiles/ConverterQt_autogen.dir
