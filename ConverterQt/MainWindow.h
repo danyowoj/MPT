@@ -57,7 +57,6 @@ private slots:
     void onAboutTriggered();
 
 private:
-    void showDigitError(int digit);
 
     void updateP1(int value);
     void updateP2(int value);
@@ -66,6 +65,8 @@ private:
     void refreshOutputDisplay();
 
     void executeDigit(int digit);
+
+    void updateDigitButtons();
 
     Ui::MainWindow *ui;
     Control *m_control;

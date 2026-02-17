@@ -40,6 +40,8 @@ MainWindow::MainWindow(QWidget *parent)
     QAction *aboutAction = new QAction("О программе", this);
     ui->menuAbout->addAction(aboutAction);
     connect(aboutAction, &QAction::triggered, this, &MainWindow::onAboutTriggered);
+
+    updateDigitButtons();
 }
 
 MainWindow::~MainWindow()
@@ -69,6 +71,7 @@ void MainWindow::updateP1(int value)
     // Сбрасываем результат, переходим в режим редактирования
     ui->lineEditInput->setText(QString::fromStdString(m_control->doCommand(18))); // clear
     ui->lineEditOutput->setText("0");
+    updateDigitButtons();
 }
 
 // -----------------------------
@@ -126,16 +129,35 @@ void MainWindow::executeDigit(int digit)
 {
     int p1 = m_control->getPin();
     if (digit >= p1)
-    {
-        QMessageBox::warning(this, "Ошибка ввода",
-                             QString("Цифра %1 недопустима в системе счисления с основанием %2.")
-                                 .arg(QString::number(digit, 16).toUpper()).arg(p1));
         return;
-    }
 
     std::string newNumber = m_control->doCommand(digit); // добавить цифру
     ui->lineEditInput->setText(QString::fromStdString(newNumber));
     ui->lineEditOutput->setText("0");
+}
+
+void MainWindow::updateDigitButtons()
+{
+    int p = m_control->getPin(); // текущее основание p1
+
+    // Кнопки 0-9
+    for (int i = 0; i <= 9; ++i)
+    {
+        QString name = QString("b%1").arg(i);
+        QPushButton* btn = findChild<QPushButton*>(name);
+        if (btn)
+            btn->setEnabled(i < p); // кнопка доступна, если ее значение меньше основания
+    }
+
+    // Кнопки A-F
+    for (int i = 10; i <= 15; ++i)
+    {
+        char letter = 'A' + (i - 10);
+        QString name = QString("b%1").arg(letter);
+        QPushButton* btn = findChild<QPushButton*>(name);
+        if (btn)
+            btn->setEnabled(i < p); // кнопка доступна, если ее значение меньше основания
+    }
 }
 
 // -----------------------------
@@ -192,19 +214,15 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         int digit = key - Qt::Key_0;
         if (digit < m_control->getPin())
             executeDigit(digit);
-        else
-            showDigitError(digit);
         return;
     }
 
-    // Буквы A-F (только верхний регистр)
+    // Буквы A-F или a-f
     else if (key >= Qt::Key_A && key <= Qt::Key_F)
     {
         int digit = key - Qt::Key_A + 10;
         if (digit < m_control->getPin())
             executeDigit(digit);
-        else
-            showDigitError(digit);
         return;
     }
 
@@ -244,14 +262,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     }
     QMainWindow::keyPressEvent(event);
 }
-
-void MainWindow::showDigitError(int digit)
-{
-    QMessageBox::warning(this, "Ошибка ввода",
-                         QString("Цифра %1 недопустима в системе счисления с основанием %2.")
-                             .arg(QString::number(digit, 16).toUpper()).arg(m_control->getPin()));
-}
-
 
 // -----------------------------
 //* Меню
