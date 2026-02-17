@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     , m_control(new Control())
 {
     ui->setupUi(this);
+    setWindowTitle("Конвертер систем счисления");
 
     // Запрещаем полям ввода получать фокус, чтобы все клавиши попадали в окно
     ui->lineEditInput->setFocusPolicy(Qt::NoFocus);
