@@ -1,3 +1,5 @@
+#include <windows.h>
+
 #include "../core/UFrac.h"
 #include <iostream>
 #include <string>
@@ -243,6 +245,9 @@ void testExtras()
 // ------------------------------------------------------------------
 int main()
 {
+    SetConsoleOutputCP(65001);
+    SetConsoleCP(65001);
+
     std::cout << "Starting TFrac tests...\n";
 
     testConstructors();

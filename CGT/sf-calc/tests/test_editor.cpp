@@ -1,3 +1,5 @@
+#include <windows.h>
+
 #include "../core/UEditor.h"
 #include <iostream>
 
@@ -120,6 +122,9 @@ void testEditorEdit()
 // ------------------------------------------------------------------
 int main()
 {
+    SetConsoleOutputCP(65001);
+    SetConsoleCP(65001);
+
     std::cout << "Starting TEditor tests...\n";
 
     testEditorConstructors();

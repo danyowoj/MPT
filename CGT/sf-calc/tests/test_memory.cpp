@@ -1,3 +1,5 @@
+#include <windows.h>
+
 #include "../core/UMemory.h"
 #include "../core/UFrac.h"
 #include <iostream>
@@ -19,16 +21,6 @@ static int failed_checks = 0;
         }                                                        \
     } while (false)
 
-// Для удобства переопределим operator+ для TFrac, если его нет.
-// В текущей реализации TFrac есть метод add, но не operator+.
-// Определим глобальный operator+, чтобы работала операция add в TMemory.
-// Это не обязательно, можно было бы в TMemory::add вызывать m_number.add(value),
-// но спецификация TMemory не привязана к TFrac, поэтому для универсальности
-// лучше использовать operator+, а для TFrac мы его сейчас определим.
-// (Если в классе TFrac уже есть operator+, то это определение не нужно или перегрузит)
-// В нашем классе TFrac нет operator+, поэтому добавим его здесь для тестов.
-// Но чтобы не менять исходный UFrac, определим operator+ глобально.
-// Однако это может конфликтовать, если в будущем добавится operator+ в UFrac.
 // Временно для тестов:
 TFrac operator+(const TFrac &a, const TFrac &b)
 {
@@ -100,6 +92,9 @@ void testMemoryStateString()
 // ------------------------------------------------------------------
 int main()
 {
+    SetConsoleOutputCP(65001);
+    SetConsoleCP(65001);
+
     std::cout << "Starting TMemory<TFrac> tests...\n";
 
     testMemoryConstructor();
