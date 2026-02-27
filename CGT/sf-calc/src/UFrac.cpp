@@ -1,4 +1,4 @@
-#include "UFrac.h"
+#include "../include/UFrac.h"
 #include <cstdlib>
 #include <cctype>
 #include <algorithm>

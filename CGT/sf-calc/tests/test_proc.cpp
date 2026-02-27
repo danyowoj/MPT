@@ -1,7 +1,7 @@
 #include <windows.h>
 
-#include "../core/TProc.h"
-#include "../core/CalcEnums.h"
+#include "../include/TProc.h"
+#include "../include/CalcEnums.h"
 #include <iostream>
 
 static int total_checks = 0;

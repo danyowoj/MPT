@@ -1,6 +1,6 @@
 #include <windows.h>
 
-#include "../core/UEditor.h"
+#include "../include/UEditor.h"
 #include <iostream>
 
 static int total_checks = 0;

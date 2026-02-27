@@ -1,5 +1,5 @@
 // TProc.cpp
-#include "TProc.h"
+#include "../include/TProc.h"
 
 TProc::TProc()
     : m_currentValue(), m_pendingOperand(), m_pendingOperation(Operation::None), m_lastOperation(Operation::None), m_lastOperand(), m_operationPending(false), m_secondOperandReceived(false)

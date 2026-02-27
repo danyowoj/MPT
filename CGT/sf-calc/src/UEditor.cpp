@@ -1,4 +1,4 @@
-#include "UEditor.h"
+#include "../include/UEditor.h"
 #include <cctype>
 
 const std::string TEditor::DEFAULT_ZERO = "0/1";

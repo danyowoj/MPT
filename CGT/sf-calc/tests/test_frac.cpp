@@ -1,6 +1,6 @@
 #include <windows.h>
 
-#include "../core/UFrac.h"
+#include "../include/UFrac.h"
 #include <iostream>
 #include <string>
 #include <cmath>

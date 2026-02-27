@@ -1,7 +1,7 @@
 #include <windows.h>
 
-#include "../core/UMemory.h"
-#include "../core/UFrac.h"
+#include "../include/UMemory.h"
+#include "../include/UFrac.h"
 #include <iostream>
 #include <string>
 
