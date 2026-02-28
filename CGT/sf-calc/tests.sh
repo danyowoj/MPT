@@ -17,6 +17,7 @@ tests["frac"]="$TEST_DIR/test_frac.cpp $SRC_DIR/UFrac.cpp"
 tests["editor"]="$TEST_DIR/test_editor.cpp $SRC_DIR/UEditor.cpp"
 tests["memory"]="$TEST_DIR/test_memory.cpp $SRC_DIR/UFrac.cpp"
 tests["proc"]="$TEST_DIR/test_proc.cpp $SRC_DIR/TProc.cpp $SRC_DIR/UFrac.cpp"
+tests["ctrl"]="$TEST_DIR/test_ctrl.cpp $SRC_DIR/UCtrl.cpp $SRC_DIR/TProc.cpp $SRC_DIR/UEditor.cpp $SRC_DIR/UFrac.cpp"
 
 headers=("UFrac.h" "UEditor.h" "UMemory.h" "TProc.h" "CalcEnums.h")
 

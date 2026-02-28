@@ -224,3 +224,8 @@ bool TFrac::isTerminatingDecimal() const
     // Если осталась 1, то конечная десятичная дробь
     return d == 1;
 }
+
+TFrac operator+(const TFrac &lhs, const TFrac &rhs)
+{
+    return lhs.add(rhs);
+}

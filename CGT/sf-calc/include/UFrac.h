@@ -57,6 +57,9 @@ public:
     bool isTerminatingDecimal() const; // конечная десятичная дробь
 };
 
+// Глобальный оператор сложения для TFrac
+TFrac operator+(const TFrac &lhs, const TFrac &rhs);
+
 int64_t gcd(int64_t a, int64_t b);
 
 #endif // UFRAC_H
