@@ -75,6 +75,6 @@ public:
     friend bool operator>=(const TFrac &lhs, const TFrac &rhs) { return lhs.greaterThan(rhs) || lhs.equals(rhs); }
 };
 
-int64_t gcd(int64_t a, int64_t b);
+static int64_t gcd(int64_t a, int64_t b);
 
 #endif // UFRAC_H

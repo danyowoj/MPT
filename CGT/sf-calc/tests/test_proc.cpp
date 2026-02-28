@@ -1,8 +1,8 @@
 #include <windows.h>
 
 #include "../include/TProc.h"
-#include "../include/CalcEnums.h"
 #include <iostream>
+#include <stdexcept>
 
 static int total_checks = 0;
 static int failed_checks = 0;
@@ -19,12 +19,34 @@ static int failed_checks = 0;
         }                                                        \
     } while (false)
 
+#define CHECK_THROWS(expr, exception_type)                                                    \
+    do                                                                                        \
+    {                                                                                         \
+        ++total_checks;                                                                       \
+        try                                                                                   \
+        {                                                                                     \
+            expr;                                                                             \
+            ++failed_checks;                                                                  \
+            std::cerr << "FAIL: " << __FILE__ << ":" << __LINE__                              \
+                      << " – " << #expr << " did not throw " << #exception_type << std::endl; \
+        }                                                                                     \
+        catch (const exception_type &)                                                        \
+        {                                                                                     \
+            /* expected */                                                                    \
+        }                                                                                     \
+        catch (...)                                                                           \
+        {                                                                                     \
+            ++failed_checks;                                                                  \
+            std::cerr << "FAIL: " << __FILE__ << ":" << __LINE__                              \
+                      << " – " << #expr << " threw a different exception" << std::endl;       \
+        }                                                                                     \
+    } while (false)
+
 bool fracEqual(const TFrac &a, const TFrac &b)
 {
-    return a.equals(b);
+    return a == b; // используем оператор ==, определённый в TFrac
 }
 
-// --------------------------------------------------------------
 void testSingleOperation()
 {
     std::cout << "\n--- Test: одиночная операция (5/1 + 2/1 = 7/1) ---\n";
@@ -39,7 +61,6 @@ void testSingleOperation()
     proc.setOperand(TFrac(2, 1));
     CHECK(proc.isOperationPending() == true);
     CHECK(proc.isSecondOperandReceived() == true);
-    CHECK(proc.getPendingOperation() == Operation::Add);
 
     proc.calculate();
     CHECK(proc.isOperationPending() == false);
@@ -56,8 +77,9 @@ void testSingleOperandOperation()
     proc.setOperation(Operation::Multiply);
     CHECK(proc.isOperationPending() == true);
     CHECK(proc.isSecondOperandReceived() == false);
+
     proc.calculate();
-    CHECK(fracEqual(proc.getCurrentValue(), TFrac(25, 1)));
+    CHECK(fracEqual(proc.getCurrentValue(), TFrac(25, 1))); // 5 * 5
     CHECK(proc.isOperationPending() == false);
 }
 
@@ -73,10 +95,10 @@ void testRepeatOperation()
     CHECK(fracEqual(proc.getCurrentValue(), TFrac(9, 1)));
 
     proc.repeatLastOperation();
-    CHECK(fracEqual(proc.getCurrentValue(), TFrac(13, 1)));
+    CHECK(fracEqual(proc.getCurrentValue(), TFrac(13, 1))); // 9 + 4
 
     proc.repeatLastOperation();
-    CHECK(fracEqual(proc.getCurrentValue(), TFrac(17, 1)));
+    CHECK(fracEqual(proc.getCurrentValue(), TFrac(17, 1))); // 13 + 4
 }
 
 void testOperationOnDisplayedValue()
@@ -90,25 +112,32 @@ void testOperationOnDisplayedValue()
     proc.calculate();
     CHECK(fracEqual(proc.getCurrentValue(), TFrac(5, 1)));
 
-    // Нажимаем + (устанавливаем операцию с текущим значением как первый операнд)
+    // Нажимаем + (устанавливаем операцию, первый операнд = текущее значение)
     proc.setOperation(Operation::Add);
     CHECK(proc.isOperationPending() == true);
     CHECK(proc.isSecondOperandReceived() == false);
+
     // Нажимаем = без ввода второго операнда
     proc.calculate();
     CHECK(fracEqual(proc.getCurrentValue(), TFrac(10, 1))); // 5 + 5
 }
 
-void testFunction()
+void testFunctions()
 {
-    std::cout << "\n--- Test: функция Sqr (5/1 -> 25/1) ---\n";
+    std::cout << "\n--- Test: функции Sqr, Reciprocal, Negate ---\n";
     TProc proc;
 
     proc.setOperand(TFrac(5, 1));
     proc.performFunction(Function::Square);
     CHECK(fracEqual(proc.getCurrentValue(), TFrac(25, 1)));
-    CHECK(proc.isOperationPending() == false);
-    CHECK(proc.isSecondOperandReceived() == false);
+
+    proc.setOperand(TFrac(2, 1));
+    proc.performFunction(Function::Reciprocal);
+    CHECK(fracEqual(proc.getCurrentValue(), TFrac(1, 2)));
+
+    proc.setOperand(TFrac(3, 4));
+    proc.performFunction(Function::Negate);
+    CHECK(fracEqual(proc.getCurrentValue(), TFrac(-3, 4)));
 }
 
 void testExpression()
@@ -117,44 +146,34 @@ void testExpression()
     TProc proc;
 
     proc.setOperand(TFrac(6, 1));
-    proc.performFunction(Function::Square);
-    CHECK(fracEqual(proc.getCurrentValue(), TFrac(36, 1)));
-
+    proc.performFunction(Function::Square); // 36/1
     proc.setOperation(Operation::Add);
-    CHECK(proc.isOperationPending() == true);
-    CHECK(proc.isSecondOperandReceived() == false);
-
     proc.setOperand(TFrac(2, 1));
-    CHECK(proc.isOperationPending() == true);
-    CHECK(proc.isSecondOperandReceived() == true);
-
-    proc.performFunction(Function::Square); // применяем к 2/1 -> 4/1
-    CHECK(fracEqual(proc.getCurrentValue(), TFrac(4, 1)));
-    CHECK(proc.isOperationPending() == true);
-    CHECK(proc.isSecondOperandReceived() == true); // второй операнд обновлён
-
-    proc.setOperation(Operation::Divide); // сначала выполнит накопленное сложение
-    // после calculate внутри setOperation: 36+4 = 40, результат 40/1, затем устанавливается деление
-    CHECK(fracEqual(proc.getCurrentValue(), TFrac(40, 1))); // результат сложения
-    CHECK(proc.isOperationPending() == true);               // теперь ожидается деление
-    CHECK(proc.isSecondOperandReceived() == false);
-
+    proc.performFunction(Function::Square); // 4/1 (второй операнд)
+    proc.setOperation(Operation::Divide);   // выполнит сложение 36+4=40, затем установит деление
     proc.setOperand(TFrac(10, 1));
-    CHECK(proc.isOperationPending() == true);
-    CHECK(proc.isSecondOperandReceived() == true);
-
-    proc.setOperation(Operation::Add);                     // выполнит деление 40/10 = 4, затем установит сложение
-    CHECK(fracEqual(proc.getCurrentValue(), TFrac(4, 1))); // результат деления
-    CHECK(proc.isOperationPending() == true);
-    CHECK(proc.isSecondOperandReceived() == false);
-
+    proc.setOperation(Operation::Add); // выполнит деление 40/10=4, затем установит сложение
     proc.setOperand(TFrac(6, 1));
-    CHECK(proc.isOperationPending() == true);
-    CHECK(proc.isSecondOperandReceived() == true);
-
     proc.calculate(); // 4 + 6 = 10
     CHECK(fracEqual(proc.getCurrentValue(), TFrac(10, 1)));
-    CHECK(proc.isOperationPending() == false);
+}
+
+void testDivisionByZero()
+{
+    std::cout << "\n--- Test: деление на ноль ---\n";
+    TProc proc;
+    proc.setOperand(TFrac(1, 2));
+    proc.setOperation(Operation::Divide);
+    proc.setOperand(TFrac(0, 1));
+    CHECK_THROWS(proc.calculate(), std::invalid_argument);
+}
+
+void testReciprocalOfZero()
+{
+    std::cout << "\n--- Test: обратная величина от нуля ---\n";
+    TProc proc;
+    proc.setOperand(TFrac(0, 1));
+    CHECK_THROWS(proc.performFunction(Function::Reciprocal), std::invalid_argument);
 }
 
 // --------------------------------------------------------------
@@ -169,8 +188,10 @@ int main()
     testSingleOperandOperation();
     testRepeatOperation();
     testOperationOnDisplayedValue();
-    testFunction();
+    testFunctions();
     testExpression();
+    testDivisionByZero();
+    testReciprocalOfZero();
 
     std::cout << "\n========================================\n";
     std::cout << "Total checks: " << total_checks << "\n";

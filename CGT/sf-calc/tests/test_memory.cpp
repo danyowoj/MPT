@@ -3,9 +3,7 @@
 #include "../include/UMemory.h"
 #include "../include/UFrac.h"
 #include <iostream>
-#include <string>
 
-// Макросы для тестирования
 static int total_checks = 0;
 static int failed_checks = 0;
 
@@ -21,66 +19,59 @@ static int failed_checks = 0;
         }                                                        \
     } while (false)
 
-// Временно для тестов:
-TFrac operator+(const TFrac &a, const TFrac &b)
+// Для удобства используем оператор ==, определённый в TFrac
+bool fracEqual(const TFrac &a, const TFrac &b)
 {
-    return a.add(b);
+    return a == b;
 }
 
-// ------------------------------------------------------------------
-void testMemoryConstructor()
+void testConstructor()
 {
-    std::cout << "\n--- Testing TMemory constructor ---\n";
+    std::cout << "\n--- TMemory constructor ---\n";
     TMemory<TFrac> mem;
     CHECK(mem.getState() == MemoryState::Off);
     CHECK(mem.stateString() == "_Off");
-    TFrac zero; // 0/1
-    CHECK(mem.getNumber().equals(zero));
+    CHECK(mem.getNumber() == TFrac());
 }
 
-void testMemoryStoreAndRecall()
+void testStoreAndRecall()
 {
-    std::cout << "\n--- Testing store() and recall() ---\n";
+    std::cout << "\n--- TMemory store/recall ---\n";
     TMemory<TFrac> mem;
-    TFrac f(3, 4);
-    mem.store(f);
+    TFrac val(3, 4);
+    mem.store(val);
     CHECK(mem.getState() == MemoryState::On);
     CHECK(mem.stateString() == "_On");
-    TFrac recalled = mem.recall();
-    CHECK(recalled.equals(f));
-    // Проверим, что recall возвращает копию, а не ссылку (меняем копию, оригинал не должен измениться)
-    recalled = TFrac(1, 2);
-    CHECK(mem.recall().equals(f)); // в памяти по-прежнему 3/4
+    CHECK(mem.recall() == val);
+    // Изменение копии не влияет на память
+    TFrac copy = mem.recall();
+    copy = TFrac(1, 2);
+    CHECK(mem.recall() == val);
 }
 
-void testMemoryAdd()
+void testAdd()
 {
-    std::cout << "\n--- Testing add() ---\n";
+    std::cout << "\n--- TMemory add ---\n";
     TMemory<TFrac> mem;
-    TFrac a(1, 2);
-    mem.store(a);
-    TFrac b(1, 3);
-    mem.add(b); // должно стать 1/2 + 1/3 = 5/6
-    TFrac expected(5, 6);
-    CHECK(mem.recall().equals(expected));
+    mem.store(TFrac(1, 2));
+    mem.add(TFrac(1, 3)); // 1/2 + 1/3 = 5/6
+    CHECK(mem.recall() == TFrac(5, 6));
     CHECK(mem.getState() == MemoryState::On);
 }
 
-void testMemoryClear()
+void testClear()
 {
-    std::cout << "\n--- Testing clear() ---\n";
+    std::cout << "\n--- TMemory clear ---\n";
     TMemory<TFrac> mem;
-    mem.store(TFrac(2, 5));
+    mem.store(TFrac(5, 1));
     mem.clear();
     CHECK(mem.getState() == MemoryState::Off);
-    CHECK(mem.stateString() == "_Off");
-    TFrac zero;
-    CHECK(mem.getNumber().equals(zero));
+    CHECK(mem.getNumber() == TFrac()); // 0/1
 }
 
-void testMemoryStateString()
+void testStateString()
 {
-    std::cout << "\n--- Testing stateString() ---\n";
+    std::cout << "\n--- TMemory stateString ---\n";
     TMemory<TFrac> mem;
     CHECK(mem.stateString() == "_Off");
     mem.store(TFrac(1, 1));
@@ -96,12 +87,11 @@ int main()
     SetConsoleCP(65001);
 
     std::cout << "Starting TMemory<TFrac> tests...\n";
-
-    testMemoryConstructor();
-    testMemoryStoreAndRecall();
-    testMemoryAdd();
-    testMemoryClear();
-    testMemoryStateString();
+    testConstructor();
+    testStoreAndRecall();
+    testAdd();
+    testClear();
+    testStateString();
 
     std::cout << "\n========================================\n";
     std::cout << "Total checks: " << total_checks << "\n";
@@ -110,7 +100,5 @@ int main()
         std::cout << "ALL TESTS PASSED!\n";
     else
         std::cout << "SOME TESTS FAILED!\n";
-    std::cout << "========================================\n";
-
     return (failed_checks == 0) ? 0 : 1;
 }
