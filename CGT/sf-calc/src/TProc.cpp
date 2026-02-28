@@ -1,37 +1,27 @@
-// TProc.cpp
 #include "../include/TProc.h"
+#include <stdexcept>
 
 TProc::TProc()
-    : m_currentValue(), m_pendingOperand(), m_pendingOperation(Operation::None), m_lastOperation(Operation::None), m_lastOperand(), m_operationPending(false), m_secondOperandReceived(false)
-{
-}
+    : m_currentValue(), m_pendingOperand(), m_pendingOperation(Operation::None), m_lastOperation(Operation::None), m_lastOperand(), m_operationPending(false), m_secondOperandReceived(false) {}
 
 void TProc::setOperand(const TFrac &value)
 {
     m_currentValue = value;
     if (m_operationPending && !m_secondOperandReceived)
-    {
         m_secondOperandReceived = true;
-    }
 }
 
 void TProc::setOperation(Operation op)
 {
     if (op == Operation::None)
         return;
-
-    // Если есть незавершённая операция и второй операнд уже получен,
-    // то сначала выполняем её (автоматически, как в обычных калькуляторах)
+    // Если есть незавершённая операция и второй операнд уже получен, выполняем её
     if (m_operationPending && m_secondOperandReceived)
-    {
-        calculate(); // после calculate() m_operationPending = false
-    }
-
-    // Устанавливаем новую операцию
-    m_pendingOperand = m_currentValue; // первый операнд
+        calculate(); // после calculate() m_operationPending станет false
+    m_pendingOperand = m_currentValue;
     m_pendingOperation = op;
     m_operationPending = true;
-    m_secondOperandReceived = false; // второго операнда пока нет
+    m_secondOperandReceived = false;
 }
 
 void TProc::performFunction(Function func)
@@ -43,7 +33,7 @@ void TProc::performFunction(Function func)
         result = m_currentValue.square();
         break;
     case Function::Reciprocal:
-        result = m_currentValue.reciprocal();
+        result = m_currentValue.reciprocal(); // может бросить исключение
         break;
     case Function::Negate:
         result = m_currentValue.negate();
@@ -52,12 +42,10 @@ void TProc::performFunction(Function func)
         return;
     }
     m_currentValue = result;
-
+    // Если функция применилась к первому операнду (второй ещё не введён), обновим pendingOperand
     if (m_operationPending && !m_secondOperandReceived)
-    {
-        m_pendingOperand = m_currentValue; // первый операнд стал новым значением
-    }
-    // Если второй операнд уже был, то меняется только он (m_currentValue), а первый остаётся.
+        m_pendingOperand = m_currentValue;
+    // Примечание: функция не сбрасывает ожидание операции
 }
 
 void TProc::calculate()
@@ -66,15 +54,7 @@ void TProc::calculate()
         return;
 
     // Определяем второй операнд
-    TFrac secondOperand;
-    if (m_secondOperandReceived)
-    {
-        secondOperand = m_currentValue;
-    }
-    else
-    {
-        secondOperand = m_pendingOperand; // второй операнд не вводился – используем первый
-    }
+    TFrac secondOperand = m_secondOperandReceived ? m_currentValue : m_pendingOperand;
 
     TFrac result;
     switch (m_pendingOperation)
@@ -89,16 +69,14 @@ void TProc::calculate()
         result = m_pendingOperand.multiply(secondOperand);
         break;
     case Operation::Divide:
-        result = m_pendingOperand.divide(secondOperand);
+        result = m_pendingOperand.divide(secondOperand); // может бросить исключение
         break;
     default:
         return;
     }
 
-    // Запоминаем для повтора
     m_lastOperation = m_pendingOperation;
     m_lastOperand = secondOperand;
-
     m_currentValue = result;
 
     m_operationPending = false;
@@ -124,13 +102,12 @@ void TProc::repeatLastOperation()
         result = m_currentValue.multiply(m_lastOperand);
         break;
     case Operation::Divide:
-        result = m_currentValue.divide(m_lastOperand);
+        result = m_currentValue.divide(m_lastOperand); // может бросить исключение
         break;
     default:
         return;
     }
     m_currentValue = result;
-    // m_lastOperation и m_lastOperand остаются
 }
 
 void TProc::clear()

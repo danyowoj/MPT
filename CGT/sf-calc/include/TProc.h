@@ -4,6 +4,11 @@
 #include "UFrac.h"
 #include "CalcEnums.h"
 
+/**
+ * @brief Процессор, выполняющий операции и функции над дробями.
+ *
+ * Хранит состояние ожидания операции, первый операнд, последнюю операцию и операнд.
+ */
 class TProc
 {
 private:
@@ -31,4 +36,4 @@ public:
     bool isSecondOperandReceived() const { return m_secondOperandReceived; }
 };
 
-#endif
+#endif // TPROC_H
