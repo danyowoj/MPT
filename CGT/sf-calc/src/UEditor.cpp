@@ -1,65 +1,74 @@
 #include "../include/UEditor.h"
+#include "../include/UFrac.h" // для проверки корректности строки
 #include <cctype>
 
-const std::string TEditor::DEFAULT_ZERO = "0/1";
-const char TEditor::SEPARATOR = '/';
-const char TEditor::MIXED_SEPARATOR = '|';
+static bool isValidFractionString(const std::string &s)
+{
+    if (s.empty())
+        return false;
 
-TEditor::TEditor() : m_string(DEFAULT_ZERO) {}
+    try
+    {
+        TFrac tmp(s); // попытка создать дробь
+        return true;
+    }
+    catch (...)
+    {
+        return false;
+    }
+}
 
 #pragma region Основные методы редактирования
 
-bool TEditor::isZero() const { return m_string == DEFAULT_ZERO; }
-
 std::string TEditor::toggleSign()
 {
-    if (!m_string.empty() && m_string[0] == '-')
+    std::string candidate;
+    if (!m_str.empty() && m_str[0] == '-')
     {
-        m_string.erase(0, 1);
-        if (m_string.empty())
-            m_string = DEFAULT_ZERO;
+        candidate = m_str.substr(1);
+        if (candidate.empty())
+            candidate = "0/1";
     }
     else
     {
-        m_string = "-" + m_string;
+        candidate = "-" + m_str;
     }
-    return m_string;
+    if (isValidFractionString(candidate))
+        m_str = candidate;
+
+    return m_str;
 }
 
 std::string TEditor::addDigit(int digit)
 {
     if (digit < 0 || digit > 9)
-        return m_string;
+        return m_str;
     char ch = static_cast<char>('0' + digit);
-    m_string.push_back(ch);
-    return m_string;
+    std::string candidate = m_str + ch;
+    if (isValidFractionString(candidate))
+    {
+        m_str = candidate;
+    }
+    return m_str;
 }
-
-std::string TEditor::addZero() { return addDigit(0); }
 
 std::string TEditor::backspace()
 {
-    if (!m_string.empty())
-    {
-        m_string.pop_back();
-        if (m_string.empty())
-            m_string = DEFAULT_ZERO;
-    }
-    return m_string;
+    if (m_str.empty())
+        return m_str;
+    std::string candidate = m_str.substr(0, m_str.size() - 1);
+    if (candidate.empty())
+        candidate = "0/1";
+    if (isValidFractionString(candidate))
+        m_str = candidate;
+    return m_str;
 }
 
 std::string TEditor::clear()
 {
-    m_string = DEFAULT_ZERO;
-    return m_string;
+    m_str = "0/1";
+    return m_str;
 }
-
-#pragma endregion
-
-#pragma region Чтение / запись строки
-
-std::string TEditor::getString() const { return m_string; }
-void TEditor::setString(const std::string &s) { m_string = s.empty() ? DEFAULT_ZERO : s; }
 
 #pragma endregion
 
@@ -77,6 +86,6 @@ std::string TEditor::edit(int cmd)
     case -3:
         return clear();
     default:
-        return m_string;
+        return m_str;
     }
 }

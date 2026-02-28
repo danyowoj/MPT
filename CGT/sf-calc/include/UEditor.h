@@ -12,29 +12,24 @@
 class TEditor
 {
 private:
-    std::string m_string; // текущая редактируемая строка
+    std::string m_str;
 
 public:
-    // Константы
-    static const std::string DEFAULT_ZERO;
-    static const char SEPARATOR;
-    static const char MIXED_SEPARATOR;
+    TEditor() : m_str("0/1") {}
 
-    // Конструктор
-    TEditor();
+    bool isZero() const { return m_str == "0/1"; }
 
-    // Основные методы редактирования
-    bool isZero() const;
+    std::string getString() const { return m_str; }
+    void setString(const std::string &s) { m_str = s.empty() ? "0/1" : s; }
+
+    // Основные операции редактирования: возвращают новую строку, если она корректна,
+    // иначе возвращают старую строку.
 
     std::string toggleSign();
     std::string addDigit(int digit);
-    std::string addZero();
+    std::string addZero() { return addDigit(0); }
     std::string backspace();
     std::string clear();
-
-    // Чтение / запись строки
-    std::string getString() const;
-    void setString(const std::string &s);
 
     // Универсальный метод редактирования
     std::string edit(int cmd);
