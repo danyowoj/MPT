@@ -18,8 +18,10 @@ tests["editor"]="$TEST_DIR/test_editor.cpp $SRC_DIR/UFrac.cpp $SRC_DIR/UEditor.c
 tests["memory"]="$TEST_DIR/test_memory.cpp $SRC_DIR/UFrac.cpp"
 tests["proc"]="$TEST_DIR/test_proc.cpp $SRC_DIR/TProc.cpp $SRC_DIR/UFrac.cpp"
 tests["ctrl"]="$TEST_DIR/test_ctrl.cpp $SRC_DIR/UCtrl.cpp $SRC_DIR/TProc.cpp $SRC_DIR/UEditor.cpp $SRC_DIR/UFrac.cpp"
+tests["settings"]="$TEST_DIR/test_settings.cpp $SRC_DIR/TSettings.cpp"
+tests["history"]="$TEST_DIR/test_history.cpp $SRC_DIR/THistory.cpp"
 
-headers=("UFrac.h" "UEditor.h" "UMemory.h" "TProc.h" "CalcEnums.h")
+headers=("UFrac.h" "UEditor.h" "UMemory.h" "TProc.h" "CalcEnums.h" "THistory.h" "TSettings.h" "UCtrl.h")
 
 run_test() {
     local name=$1
