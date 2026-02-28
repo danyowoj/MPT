@@ -2,13 +2,9 @@
 #define TSETTINGS_H
 
 #include <string>
+#include "UFrac.h" // для DisplayFormat
 
-enum class DisplayFormat
-{
-    Fraction, // дробь
-    Decimal   // десятичный, если возможно
-};
-
+// Источник операндов
 enum class OperandSource
 {
     Memory,
@@ -16,9 +12,7 @@ enum class OperandSource
 };
 
 /**
- * @brief Класс настроек пользователя.
- *
- * Отвечает за хранение, сохранение и загрузку настроек.
+ * @brief Класс для хранения и загрузки/сохранения настроек пользователя
  */
 class TSettings
 {
@@ -29,14 +23,17 @@ private:
 public:
     TSettings();
 
+    // Геттеры
     DisplayFormat displayFormat() const;
     OperandSource operandSource() const;
 
+    // Сеттеры
     void setDisplayFormat(DisplayFormat fmt);
     void setOperandSource(OperandSource src);
 
+    // Сохранение и загрузка
     void saveToFile(const std::string &filename) const;
     void loadFromFile(const std::string &filename);
 };
 
-#endif // TSETTINGS_H
+#endif

@@ -1,8 +1,8 @@
 #include "../include/UCtrl.h"
 #include <stdexcept>
 
-TCtrl::TCtrl()
-    : m_editor(new TEditor()), m_proc(new TProc()), m_memory(new TMemory<TFrac>()), m_state(TCtrlState::cStart), m_number()
+TCtrl::TCtrl(TSettings *settings, THistory *history)
+    : m_editor(new TEditor()), m_proc(new TProc()), m_memory(new TMemory<TFrac>()), m_settings(settings), m_history(history), m_state(TCtrlState::cStart), m_number()
 {
     updateEditor();
 }
@@ -38,13 +38,27 @@ void TCtrl::setState(TCtrlState newState)
 void TCtrl::handleError()
 {
     setState(TCtrlState::cError);
-    m_proc->clear(); // сброс процессора при ошибке
+    m_proc->clear();
     m_editor->setString("Error");
+}
+
+void TCtrl::addHistoryEntry(const std::string &entry)
+{
+    if (m_history)
+    {
+        m_history->addEntry(entry);
+    }
 }
 
 std::string TCtrl::getDisplay() const
 {
-    return m_editor->getString();
+    if (m_state == TCtrlState::cError)
+    {
+        return m_editor->getString();
+    }
+    // Если есть настройки, используем их формат для отображения числа
+    DisplayFormat fmt = m_settings ? m_settings->displayFormat() : DisplayFormat::Fraction;
+    return m_number.toString(fmt);
 }
 
 // ----------------------------------------------------------------------
@@ -66,7 +80,7 @@ std::string TCtrl::executeEditorCommand(int cmd)
             m_editor->setString(oldStr);
         }
     }
-    return m_editor->getString();
+    return getDisplay();
 }
 
 // ----------------------------------------------------------------------
@@ -88,11 +102,26 @@ std::string TCtrl::executeOperation(int cmd)
         op = Operation::Divide;
         break;
     default:
-        return m_editor->getString();
+        return getDisplay();
     }
+
     m_proc->setOperation(op);
     setState(TCtrlState::cOpChange);
-    return m_editor->getString();
+
+    // Если источник операндов Memory и память не пуста, автоматически подставляем число из памяти
+    if (m_settings && m_settings->operandSource() == OperandSource::Memory)
+    {
+        if (m_memory->getState() == MemoryState::On)
+        {
+            // Подставляем число из памяти как второй операнд
+            TFrac memVal = m_memory->recall();
+            m_proc->setOperand(memVal);
+            m_number = memVal;
+            updateEditor();
+        }
+    }
+
+    return getDisplay();
 }
 
 // ----------------------------------------------------------------------
@@ -111,21 +140,27 @@ std::string TCtrl::executeFunction(int cmd)
         func = Function::Negate;
         break;
     default:
-        return m_editor->getString();
+        return getDisplay();
     }
 
     try
     {
+        // Запомним значение до функции для истории
+        TFrac before = m_number;
         m_proc->performFunction(func);
         m_number = m_proc->getCurrentValue();
         updateEditor();
         setState(TCtrlState::cFunDone);
+
+        // Добавляем запись в историю
+        std::string entry = before.toString() + " " + (func == Function::Square ? "sqr" : (func == Function::Reciprocal ? "1/x" : "±")) + " = " + m_number.toString();
+        addHistoryEntry(entry);
     }
     catch (...)
     {
         handleError();
     }
-    return m_editor->getString();
+    return getDisplay();
 }
 
 // ----------------------------------------------------------------------
@@ -133,16 +168,20 @@ std::string TCtrl::calculateExpression()
 {
     try
     {
+        TFrac first = m_proc->getCurrentValue();
         m_proc->calculate();
-        m_number = m_proc->getCurrentValue();
+        TFrac result = m_proc->getCurrentValue();
+        m_number = result;
         updateEditor();
         setState(TCtrlState::cExpDone);
+
+        addHistoryEntry("= " + result.toString());
     }
     catch (...)
     {
         handleError();
     }
-    return m_editor->getString();
+    return getDisplay();
 }
 
 // ----------------------------------------------------------------------
@@ -153,7 +192,7 @@ std::string TCtrl::setInitialState()
     m_number = TFrac();
     m_proc->setOperand(m_number);
     setState(TCtrlState::cStart);
-    return m_editor->getString();
+    return getDisplay();
 }
 
 // ----------------------------------------------------------------------
@@ -181,7 +220,7 @@ std::string TCtrl::executeMemoryCommand(int cmd, std::string &memState)
         break;
     }
     memState = m_memory->stateString();
-    return m_editor->getString();
+    return getDisplay();
 }
 
 // ----------------------------------------------------------------------
@@ -203,10 +242,9 @@ std::string TCtrl::executeClipboardCommand(int cmd, std::string &clipboard)
         }
         catch (...)
         {
-            // Не удалось вставить – игнорируем
         }
     }
-    return m_editor->getString();
+    return getDisplay();
 }
 
 // ----------------------------------------------------------------------
@@ -244,6 +282,6 @@ std::string TCtrl::executeCommand(int cmd, std::string &clipboard, std::string &
     case CMD_PASTE:
         return executeClipboardCommand(cmd, clipboard);
     default:
-        return m_editor->getString();
+        return getDisplay();
     }
 }

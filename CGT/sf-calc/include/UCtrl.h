@@ -1,9 +1,11 @@
 #ifndef UCTRL_H
 #define UCTRL_H
 
-#include "../include/TProc.h"
-#include "../include/UEditor.h"
-#include "../include/UMemory.h"
+#include "TProc.h"
+#include "UEditor.h"
+#include "UMemory.h"
+#include "TSettings.h"
+#include "THistory.h"
 #include <string>
 #include <memory>
 
@@ -20,7 +22,6 @@ enum class TCtrlState
 
 enum CommandCode
 {
-    // Цифры 0-9
     CMD_0 = 0,
     CMD_1,
     CMD_2,
@@ -31,61 +32,47 @@ enum CommandCode
     CMD_7,
     CMD_8,
     CMD_9,
-    // Операции
     CMD_ADD = 10,
     CMD_SUBTRACT,
     CMD_MULTIPLY,
     CMD_DIVIDE,
-    // Функции
     CMD_SQR = 14,
     CMD_RECIPROCAL,
     CMD_NEGATE,
-    // Управление
     CMD_EQUALS = 17,
     CMD_CLEAR,
     CMD_BACKSPACE,
     CMD_TOGGLE_SIGN,
-    // Память
     CMD_MEM_STORE = 21,
     CMD_MEM_RECALL,
     CMD_MEM_CLEAR,
     CMD_MEM_ADD,
-    // Буфер обмена
     CMD_COPY = 25,
     CMD_PASTE
 };
 
-/**
- * @brief Класс управления калькулятором (TCtrl)
- *
- * Отвечает за координацию редактора, процессора, памяти и буфера обмена.
- * Реализует конечный автомат состояний.
- */
 class TCtrl
 {
 private:
-    TEditor *m_editor;        // редактор
-    TProc *m_proc;            // процессор
-    TMemory<TFrac> *m_memory; // память
-    TCtrlState m_state;       // текущее состояние
-    TFrac m_number;           // последний результат (дублирует текущее значение)
+    TEditor *m_editor;
+    TProc *m_proc;
+    TMemory<TFrac> *m_memory;
+    TSettings *m_settings; // не владеет, может быть nullptr
+    THistory *m_history;   // не владеет, может быть nullptr
+    TCtrlState m_state;
+    TFrac m_number;
 
-    void updateFromEditor();            // парсит строку редактора в m_number
-    void updateEditor();                // устанавливает строку редактора из m_number
-    void setState(TCtrlState newState); // устанавливает состояние
-    void handleError();                 // переход в состояние ошибки
+    void updateFromEditor();
+    void updateEditor();
+    void setState(TCtrlState newState);
+    void handleError();
+    void addHistoryEntry(const std::string &entry); // helper, проверяет m_history
 
 public:
-    TCtrl();
+    // Конструктор принимает указатели на настройки и историю (опционально)
+    TCtrl(TSettings *settings = nullptr, THistory *history = nullptr);
     ~TCtrl();
 
-    /**
-     * @brief Основной метод обработки команд пользователя
-     * @param cmd код команды
-     * @param clipboard строка буфера обмена (вход/выход)
-     * @param memState строка состояния памяти (вход/выход)
-     * @return строка для отображения на дисплее
-     */
     std::string executeCommand(int cmd, std::string &clipboard, std::string &memState);
 
     std::string executeEditorCommand(int cmd);
@@ -96,9 +83,12 @@ public:
     std::string executeMemoryCommand(int cmd, std::string &memState);
     std::string executeClipboardCommand(int cmd, std::string &clipboard);
 
-    // Доступ к состоянию
     TCtrlState getState() const { return m_state; }
-    std::string getDisplay() const; // текущая строка для отображения
+    std::string getDisplay() const; // использует m_settings для форматирования
+
+    // Методы для изменения настроек/истории после создания (если нужно)
+    void setSettings(TSettings *settings) { m_settings = settings; }
+    void setHistory(THistory *history) { m_history = history; }
 };
 
-#endif // UCTRL_H
+#endif
