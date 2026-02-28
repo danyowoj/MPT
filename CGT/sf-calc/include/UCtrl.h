@@ -5,12 +5,13 @@
 #include "../include/UEditor.h"
 #include "../include/UMemory.h"
 #include <string>
+#include <memory>
 
 enum class TCtrlState
 {
     cStart,
     cEditing,
-    cFuncDone,
+    cFunDone,
     cValDone,
     cExpDone,
     cOpChange,
@@ -19,6 +20,7 @@ enum class TCtrlState
 
 enum CommandCode
 {
+    // Цифры 0-9
     CMD_0 = 0,
     CMD_1,
     CMD_2,
@@ -29,26 +31,26 @@ enum CommandCode
     CMD_7,
     CMD_8,
     CMD_9,
-
+    // Операции
     CMD_ADD = 10,
     CMD_SUBTRACT,
     CMD_MULTIPLY,
     CMD_DIVIDE,
-
+    // Функции
     CMD_SQR = 14,
     CMD_RECIPROCAL,
     CMD_NEGATE,
-
+    // Управление
     CMD_EQUALS = 17,
     CMD_CLEAR,
     CMD_BACKSPACE,
     CMD_TOGGLE_SIGN,
-
+    // Память
     CMD_MEM_STORE = 21,
     CMD_MEM_RECALL,
     CMD_MEM_CLEAR,
     CMD_MEM_ADD,
-
+    // Буфер обмена
     CMD_COPY = 25,
     CMD_PASTE
 };
@@ -56,21 +58,22 @@ enum CommandCode
 /**
  * @brief Класс управления калькулятором (TCtrl)
  *
- * Координирует работу редактора, процессора, памяти и буфера обмена.
- * Поддерживает конечный автомат состояний.
+ * Отвечает за координацию редактора, процессора, памяти и буфера обмена.
+ * Реализует конечный автомат состояний.
  */
 class TCtrl
 {
 private:
-    TEditor *m_editor;
-    TProc *m_proc;
-    TMemory<TFrac> *m_memory;
-    TCtrlState m_state;
-    TFrac m_number;           // последний результат
-    std::string m_lastResult; // втрока для отображния
+    TEditor *m_editor;        // редактор
+    TProc *m_proc;            // процессор
+    TMemory<TFrac> *m_memory; // память
+    TCtrlState m_state;       // текущее состояние
+    TFrac m_number;           // последний результат (дублирует текущее значение)
 
-    void updateResultString();
-    void setState(TCtrlState newState);
+    void updateFromEditor();            // парсит строку редактора в m_number
+    void updateEditor();                // устанавливает строку редактора из m_number
+    void setState(TCtrlState newState); // устанавливает состояние
+    void handleError();                 // переход в состояние ошибки
 
 public:
     TCtrl();
@@ -93,8 +96,9 @@ public:
     std::string executeMemoryCommand(int cmd, std::string &memState);
     std::string executeClipboardCommand(int cmd, std::string &clipboard);
 
+    // Доступ к состоянию
     TCtrlState getState() const { return m_state; }
-    std::string getDisplay() const { return m_lastResult; }
+    std::string getDisplay() const; // текущая строка для отображения
 };
 
 #endif // UCTRL_H
