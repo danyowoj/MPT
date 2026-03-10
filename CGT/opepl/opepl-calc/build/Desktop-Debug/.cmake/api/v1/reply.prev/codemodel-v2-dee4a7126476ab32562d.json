@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-f6ddd9034a4c995e911c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "opepl-calc",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "opepl-calc::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-opepl-calc-Debug-4a159b91c000a57ee42e.json",
+					"name" : "opepl-calc",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "opepl-calc_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-opepl-calc_autogen-Debug-1a0ba7dbdc1b5f496878.json",
+					"name" : "opepl-calc_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "opepl-calc_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-opepl-calc_autogen_timestamp_deps-Debug-960312914c98a5948af5.json",
+					"name" : "opepl-calc_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/danyowoj/Documents/Uni/MPT/CGT/opepl/opepl-calc/build/Desktop-Debug",
+		"source" : "/home/danyowoj/Documents/Uni/MPT/CGT/opepl/opepl-calc"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}
