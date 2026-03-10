@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "" "SF-Calculator_autogen/timestamp" "custom" "SF-Calculator_autogen/deps"
+  "/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/HelpDialog.cpp" "CMakeFiles/SF-Calculator.dir/HelpDialog.cpp.o" "gcc" "CMakeFiles/SF-Calculator.dir/HelpDialog.cpp.o.d"
   "/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/MainWindow.cpp" "CMakeFiles/SF-Calculator.dir/MainWindow.cpp.o" "gcc" "CMakeFiles/SF-Calculator.dir/MainWindow.cpp.o.d"
   "/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/build/Desktop-Debug/SF-Calculator_autogen/mocs_compilation.cpp" "CMakeFiles/SF-Calculator.dir/SF-Calculator_autogen/mocs_compilation.cpp.o" "gcc" "CMakeFiles/SF-Calculator.dir/SF-Calculator_autogen/mocs_compilation.cpp.o.d"
   "/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/SettingsDialog.cpp" "CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.o" "gcc" "CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.o.d"

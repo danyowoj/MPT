@@ -118,10 +118,24 @@ CMakeFiles/SF-Calculator.dir/MainWindow.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SF-Calculator.dir/MainWindow.cpp.s"
 	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/MainWindow.cpp -o CMakeFiles/SF-Calculator.dir/MainWindow.cpp.s
 
+CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.o: CMakeFiles/SF-Calculator.dir/flags.make
+CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.o: /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/SettingsDialog.cpp
+CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.o: CMakeFiles/SF-Calculator.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.o"
+	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.o -MF CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.o.d -o CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.o -c /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/SettingsDialog.cpp
+
+CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.i"
+	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/SettingsDialog.cpp > CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.i
+
+CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.s"
+	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/SettingsDialog.cpp -o CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.s
+
 CMakeFiles/SF-Calculator.dir/src/THistory.cpp.o: CMakeFiles/SF-Calculator.dir/flags.make
 CMakeFiles/SF-Calculator.dir/src/THistory.cpp.o: /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/src/THistory.cpp
 CMakeFiles/SF-Calculator.dir/src/THistory.cpp.o: CMakeFiles/SF-Calculator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/SF-Calculator.dir/src/THistory.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/SF-Calculator.dir/src/THistory.cpp.o"
 	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SF-Calculator.dir/src/THistory.cpp.o -MF CMakeFiles/SF-Calculator.dir/src/THistory.cpp.o.d -o CMakeFiles/SF-Calculator.dir/src/THistory.cpp.o -c /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/src/THistory.cpp
 
 CMakeFiles/SF-Calculator.dir/src/THistory.cpp.i: cmake_force
@@ -135,7 +149,7 @@ CMakeFiles/SF-Calculator.dir/src/THistory.cpp.s: cmake_force
 CMakeFiles/SF-Calculator.dir/src/TProc.cpp.o: CMakeFiles/SF-Calculator.dir/flags.make
 CMakeFiles/SF-Calculator.dir/src/TProc.cpp.o: /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/src/TProc.cpp
 CMakeFiles/SF-Calculator.dir/src/TProc.cpp.o: CMakeFiles/SF-Calculator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/SF-Calculator.dir/src/TProc.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/SF-Calculator.dir/src/TProc.cpp.o"
 	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SF-Calculator.dir/src/TProc.cpp.o -MF CMakeFiles/SF-Calculator.dir/src/TProc.cpp.o.d -o CMakeFiles/SF-Calculator.dir/src/TProc.cpp.o -c /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/src/TProc.cpp
 
 CMakeFiles/SF-Calculator.dir/src/TProc.cpp.i: cmake_force
@@ -149,7 +163,7 @@ CMakeFiles/SF-Calculator.dir/src/TProc.cpp.s: cmake_force
 CMakeFiles/SF-Calculator.dir/src/TSettings.cpp.o: CMakeFiles/SF-Calculator.dir/flags.make
 CMakeFiles/SF-Calculator.dir/src/TSettings.cpp.o: /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/src/TSettings.cpp
 CMakeFiles/SF-Calculator.dir/src/TSettings.cpp.o: CMakeFiles/SF-Calculator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/SF-Calculator.dir/src/TSettings.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/SF-Calculator.dir/src/TSettings.cpp.o"
 	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SF-Calculator.dir/src/TSettings.cpp.o -MF CMakeFiles/SF-Calculator.dir/src/TSettings.cpp.o.d -o CMakeFiles/SF-Calculator.dir/src/TSettings.cpp.o -c /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/src/TSettings.cpp
 
 CMakeFiles/SF-Calculator.dir/src/TSettings.cpp.i: cmake_force
@@ -163,7 +177,7 @@ CMakeFiles/SF-Calculator.dir/src/TSettings.cpp.s: cmake_force
 CMakeFiles/SF-Calculator.dir/src/UCtrl.cpp.o: CMakeFiles/SF-Calculator.dir/flags.make
 CMakeFiles/SF-Calculator.dir/src/UCtrl.cpp.o: /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/src/UCtrl.cpp
 CMakeFiles/SF-Calculator.dir/src/UCtrl.cpp.o: CMakeFiles/SF-Calculator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/SF-Calculator.dir/src/UCtrl.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/SF-Calculator.dir/src/UCtrl.cpp.o"
 	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SF-Calculator.dir/src/UCtrl.cpp.o -MF CMakeFiles/SF-Calculator.dir/src/UCtrl.cpp.o.d -o CMakeFiles/SF-Calculator.dir/src/UCtrl.cpp.o -c /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/src/UCtrl.cpp
 
 CMakeFiles/SF-Calculator.dir/src/UCtrl.cpp.i: cmake_force
@@ -177,7 +191,7 @@ CMakeFiles/SF-Calculator.dir/src/UCtrl.cpp.s: cmake_force
 CMakeFiles/SF-Calculator.dir/src/UEditor.cpp.o: CMakeFiles/SF-Calculator.dir/flags.make
 CMakeFiles/SF-Calculator.dir/src/UEditor.cpp.o: /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/src/UEditor.cpp
 CMakeFiles/SF-Calculator.dir/src/UEditor.cpp.o: CMakeFiles/SF-Calculator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/SF-Calculator.dir/src/UEditor.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/SF-Calculator.dir/src/UEditor.cpp.o"
 	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SF-Calculator.dir/src/UEditor.cpp.o -MF CMakeFiles/SF-Calculator.dir/src/UEditor.cpp.o.d -o CMakeFiles/SF-Calculator.dir/src/UEditor.cpp.o -c /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/src/UEditor.cpp
 
 CMakeFiles/SF-Calculator.dir/src/UEditor.cpp.i: cmake_force
@@ -191,7 +205,7 @@ CMakeFiles/SF-Calculator.dir/src/UEditor.cpp.s: cmake_force
 CMakeFiles/SF-Calculator.dir/src/UFrac.cpp.o: CMakeFiles/SF-Calculator.dir/flags.make
 CMakeFiles/SF-Calculator.dir/src/UFrac.cpp.o: /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/src/UFrac.cpp
 CMakeFiles/SF-Calculator.dir/src/UFrac.cpp.o: CMakeFiles/SF-Calculator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/SF-Calculator.dir/src/UFrac.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/SF-Calculator.dir/src/UFrac.cpp.o"
 	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SF-Calculator.dir/src/UFrac.cpp.o -MF CMakeFiles/SF-Calculator.dir/src/UFrac.cpp.o.d -o CMakeFiles/SF-Calculator.dir/src/UFrac.cpp.o -c /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/src/UFrac.cpp
 
 CMakeFiles/SF-Calculator.dir/src/UFrac.cpp.i: cmake_force
@@ -202,32 +216,33 @@ CMakeFiles/SF-Calculator.dir/src/UFrac.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SF-Calculator.dir/src/UFrac.cpp.s"
 	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/src/UFrac.cpp -o CMakeFiles/SF-Calculator.dir/src/UFrac.cpp.s
 
-CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.o: CMakeFiles/SF-Calculator.dir/flags.make
-CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.o: /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/SettingsDialog.cpp
-CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.o: CMakeFiles/SF-Calculator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.o"
-	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.o -MF CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.o.d -o CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.o -c /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/SettingsDialog.cpp
+CMakeFiles/SF-Calculator.dir/HelpDialog.cpp.o: CMakeFiles/SF-Calculator.dir/flags.make
+CMakeFiles/SF-Calculator.dir/HelpDialog.cpp.o: /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/HelpDialog.cpp
+CMakeFiles/SF-Calculator.dir/HelpDialog.cpp.o: CMakeFiles/SF-Calculator.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/SF-Calculator.dir/HelpDialog.cpp.o"
+	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SF-Calculator.dir/HelpDialog.cpp.o -MF CMakeFiles/SF-Calculator.dir/HelpDialog.cpp.o.d -o CMakeFiles/SF-Calculator.dir/HelpDialog.cpp.o -c /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/HelpDialog.cpp
 
-CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.i"
-	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/SettingsDialog.cpp > CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.i
+CMakeFiles/SF-Calculator.dir/HelpDialog.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SF-Calculator.dir/HelpDialog.cpp.i"
+	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/HelpDialog.cpp > CMakeFiles/SF-Calculator.dir/HelpDialog.cpp.i
 
-CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.s"
-	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/SettingsDialog.cpp -o CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.s
+CMakeFiles/SF-Calculator.dir/HelpDialog.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SF-Calculator.dir/HelpDialog.cpp.s"
+	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/HelpDialog.cpp -o CMakeFiles/SF-Calculator.dir/HelpDialog.cpp.s
 
 # Object files for target SF-Calculator
 SF__Calculator_OBJECTS = \
 "CMakeFiles/SF-Calculator.dir/SF-Calculator_autogen/mocs_compilation.cpp.o" \
 "CMakeFiles/SF-Calculator.dir/main.cpp.o" \
 "CMakeFiles/SF-Calculator.dir/MainWindow.cpp.o" \
+"CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.o" \
 "CMakeFiles/SF-Calculator.dir/src/THistory.cpp.o" \
 "CMakeFiles/SF-Calculator.dir/src/TProc.cpp.o" \
 "CMakeFiles/SF-Calculator.dir/src/TSettings.cpp.o" \
 "CMakeFiles/SF-Calculator.dir/src/UCtrl.cpp.o" \
 "CMakeFiles/SF-Calculator.dir/src/UEditor.cpp.o" \
 "CMakeFiles/SF-Calculator.dir/src/UFrac.cpp.o" \
-"CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.o"
+"CMakeFiles/SF-Calculator.dir/HelpDialog.cpp.o"
 
 # External object files for target SF-Calculator
 SF__Calculator_EXTERNAL_OBJECTS =
@@ -235,19 +250,20 @@ SF__Calculator_EXTERNAL_OBJECTS =
 SF-Calculator: CMakeFiles/SF-Calculator.dir/SF-Calculator_autogen/mocs_compilation.cpp.o
 SF-Calculator: CMakeFiles/SF-Calculator.dir/main.cpp.o
 SF-Calculator: CMakeFiles/SF-Calculator.dir/MainWindow.cpp.o
+SF-Calculator: CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.o
 SF-Calculator: CMakeFiles/SF-Calculator.dir/src/THistory.cpp.o
 SF-Calculator: CMakeFiles/SF-Calculator.dir/src/TProc.cpp.o
 SF-Calculator: CMakeFiles/SF-Calculator.dir/src/TSettings.cpp.o
 SF-Calculator: CMakeFiles/SF-Calculator.dir/src/UCtrl.cpp.o
 SF-Calculator: CMakeFiles/SF-Calculator.dir/src/UEditor.cpp.o
 SF-Calculator: CMakeFiles/SF-Calculator.dir/src/UFrac.cpp.o
-SF-Calculator: CMakeFiles/SF-Calculator.dir/SettingsDialog.cpp.o
+SF-Calculator: CMakeFiles/SF-Calculator.dir/HelpDialog.cpp.o
 SF-Calculator: CMakeFiles/SF-Calculator.dir/build.make
 SF-Calculator: /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.15.13
 SF-Calculator: /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.15.13
 SF-Calculator: /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.15.13
 SF-Calculator: CMakeFiles/SF-Calculator.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable SF-Calculator"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Linking CXX executable SF-Calculator"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SF-Calculator.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -79,6 +79,12 @@
 	"HEADERS" : 
 	[
 		[
+			"/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/HelpDialog.h",
+			"MU",
+			"EWIEGA46WW/moc_HelpDialog.cpp",
+			null
+		],
+		[
 			"/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/MainWindow.h",
 			"MU",
 			"EWIEGA46WW/moc_MainWindow.cpp",
@@ -190,6 +196,11 @@
 	"SETTINGS_FILE" : "/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/build/Desktop-Debug/CMakeFiles/SF-Calculator_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[
+			"/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/HelpDialog.cpp",
+			"MU",
+			null
+		],
 		[
 			"/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/MainWindow.cpp",
 			"MU",

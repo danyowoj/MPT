@@ -1,60 +1,80 @@
 #include "SettingsDialog.h"
-#include <QRadioButton>
-#include <QButtonGroup>
 #include <QVBoxLayout>
-#include <QDialogButtonBox>
+#include <QHBoxLayout>
 #include <QLabel>
+#include <QComboBox>
+#include <QCheckBox>
+#include <QSpinBox>
+#include <QDialogButtonBox>
+#include <QGroupBox>
 
-SettingsDialog::SettingsDialog(TSettings& settings, QWidget *parent)
-    : QDialog(parent), m_settings(settings)
+SettingsDialog::SettingsDialog(const TSettings &settings, QWidget *parent)
+    : QDialog(parent)
+    , m_originalSettings(settings)
 {
-    setWindowTitle(tr("Settings"));
+    setupUI();
 
-    QVBoxLayout *layout = new QVBoxLayout(this);
-
-    // Формат отображения
-    layout->addWidget(new QLabel(tr("Display format:")));
-    m_fracRadio = new QRadioButton(tr("Fraction"));
-    m_decRadio = new QRadioButton(tr("Decimal"));
-    QButtonGroup *fmtGroup = new QButtonGroup(this);
-    fmtGroup->addButton(m_fracRadio);
-    fmtGroup->addButton(m_decRadio);
-    layout->addWidget(m_fracRadio);
-    layout->addWidget(m_decRadio);
-
-    if (m_settings.displayFormat() == DisplayFormat::Fraction)
-        m_fracRadio->setChecked(true);
-    else
-        m_decRadio->setChecked(true);
-
-    layout->addSpacing(10);
-
-    // Источник операндов
-    layout->addWidget(new QLabel(tr("Operand source:")));
-    m_memRadio = new QRadioButton(tr("Memory"));
-    m_clipRadio = new QRadioButton(tr("Clipboard"));
-    QButtonGroup *srcGroup = new QButtonGroup(this);
-    srcGroup->addButton(m_memRadio);
-    srcGroup->addButton(m_clipRadio);
-    layout->addWidget(m_memRadio);
-    layout->addWidget(m_clipRadio);
-
-    if (m_settings.operandSource() == OperandSource::Memory)
-        m_memRadio->setChecked(true);
-    else
-        m_clipRadio->setChecked(true);
-
-    layout->addSpacing(10);
-
-    m_buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-    connect(m_buttonBox, &QDialogButtonBox::accepted, this, &SettingsDialog::accept);
-    connect(m_buttonBox, &QDialogButtonBox::rejected, this, &SettingsDialog::reject);
-    layout->addWidget(m_buttonBox);
+    // Устанавливаем текущие значения из настроек
+    m_cmbDisplayFormat->setCurrentIndex(static_cast<int>(m_originalSettings.displayFormat()));
+    m_cmbOperandSource->setCurrentIndex(static_cast<int>(m_originalSettings.operandSource()));
+    m_spinHistorySize->setValue(m_originalSettings.extra().historySize);
 }
 
-void SettingsDialog::accept()
+void SettingsDialog::setupUI()
 {
-    m_settings.setDisplayFormat(m_fracRadio->isChecked() ? DisplayFormat::Fraction : DisplayFormat::Decimal);
-    m_settings.setOperandSource(m_memRadio->isChecked() ? OperandSource::Memory : OperandSource::Clipboard);
-    QDialog::accept();
+    setWindowTitle(tr("Settings"));
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+
+    // ---- Группа отображения ----
+    QGroupBox *displayGroup = new QGroupBox(tr("Display"));
+    QVBoxLayout *displayLayout = new QVBoxLayout(displayGroup);
+    m_cmbDisplayFormat = new QComboBox();
+    m_cmbDisplayFormat->addItem(tr("Fraction"));
+    m_cmbDisplayFormat->addItem(tr("Decimal (if terminating)"));
+    displayLayout->addWidget(new QLabel(tr("Display format:")));
+    displayLayout->addWidget(m_cmbDisplayFormat);
+    mainLayout->addWidget(displayGroup);
+
+    // ---- Группа операций ----
+    QGroupBox *operationGroup = new QGroupBox(tr("Operations"));
+    QVBoxLayout *operationLayout = new QVBoxLayout(operationGroup);
+    m_cmbOperandSource = new QComboBox();
+    m_cmbOperandSource->addItem(tr("Memory"));
+    m_cmbOperandSource->addItem(tr("Clipboard"));
+    operationLayout->addWidget(new QLabel(tr("Operand source:")));
+    operationLayout->addWidget(m_cmbOperandSource);
+    mainLayout->addWidget(operationGroup);
+
+    // ---- Группа дополнительных настроек ----
+    QGroupBox *extraGroup = new QGroupBox(tr("Extra"));
+    QVBoxLayout *extraLayout = new QVBoxLayout(extraGroup);
+
+    QHBoxLayout *historyLayout = new QHBoxLayout();
+    historyLayout->addWidget(new QLabel(tr("History size:")));
+    m_spinHistorySize = new QSpinBox();
+    m_spinHistorySize->setRange(1, 1000);
+    m_spinHistorySize->setValue(100);
+    historyLayout->addWidget(m_spinHistorySize);
+    extraLayout->addLayout(historyLayout);
+
+    mainLayout->addWidget(extraGroup);
+
+    // ---- Кнопки OK/Cancel ----
+    m_buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+    connect(m_buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
+    connect(m_buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
+    mainLayout->addWidget(m_buttonBox);
+}
+
+TSettings SettingsDialog::getSettings() const
+{
+    TSettings result = m_originalSettings;
+    result.setDisplayFormat(static_cast<DisplayFormat>(m_cmbDisplayFormat->currentIndex()));
+    result.setOperandSource(static_cast<OperandSource>(m_cmbOperandSource->currentIndex()));
+
+    ExtraSettings extra;
+    extra.historySize = m_spinHistorySize->value();
+    result.setExtra(extra);
+
+    return result;
 }

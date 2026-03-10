@@ -31,7 +31,11 @@ public:
     void clear();
 
     TFrac getCurrentValue() const;
+    Operation getLastOperation() const { return m_lastOperation; }
+    TFrac getLastOperand() const { return m_lastOperand; }
+    TFrac getPendingOperand() const { return m_pendingOperand; }
     Operation getPendingOperation() const { return m_pendingOperation; }
+
     bool isOperationPending() const { return m_operationPending; }
     bool isSecondOperandReceived() const { return m_secondOperandReceived; }
 };

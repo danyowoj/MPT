@@ -4,25 +4,27 @@
 #include <QDialog>
 #include "include/TSettings.h"
 
-class QRadioButton;
+class QComboBox;
+class QCheckBox;
+class QSpinBox;
 class QDialogButtonBox;
 
 class SettingsDialog : public QDialog
 {
     Q_OBJECT
 public:
-    explicit SettingsDialog(TSettings& settings, QWidget *parent = nullptr);
-
-private slots:
-    void accept() override;
+    explicit SettingsDialog(const TSettings &settings, QWidget *parent = nullptr);
+    TSettings getSettings() const;
 
 private:
-    TSettings& m_settings;
-    QRadioButton *m_fracRadio;
-    QRadioButton *m_decRadio;
-    QRadioButton *m_memRadio;
-    QRadioButton *m_clipRadio;
+    void setupUI();
+
+    TSettings m_originalSettings;
+    QComboBox *m_cmbDisplayFormat;
+    QComboBox *m_cmbOperandSource;
+    QSpinBox *m_spinHistorySize;
+    QCheckBox *m_chkSoundEnabled;
     QDialogButtonBox *m_buttonBox;
 };
 
-#endif
+#endif // SETTINGSDIALOG_H

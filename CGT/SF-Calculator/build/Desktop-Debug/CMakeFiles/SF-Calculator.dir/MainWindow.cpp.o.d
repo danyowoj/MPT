@@ -338,14 +338,14 @@ CMakeFiles/SF-Calculator.dir/MainWindow.cpp.o: \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qvariant.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qmap.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/variant \
+  /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/include/TSettings.h \
+  /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/include/UFrac.h \
+  /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/include/THistory.h \
   /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/include/UCtrl.h \
   /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/include/TProc.h \
-  /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/include/UFrac.h \
   /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/include/CalcEnums.h \
   /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/include/UEditor.h \
   /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/include/UMemory.h \
-  /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/include/TSettings.h \
-  /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/include/THistory.h \
   /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/build/Desktop-Debug/SF-Calculator_autogen/include/ui_MainWindow.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/QVariant \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QAction \
@@ -399,11 +399,9 @@ CMakeFiles/SF-Calculator.dir/MainWindow.cpp.o: \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QStatusBar \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qstatusbar.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QWidget \
-  /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/SettingsDialog.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QDialog \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qdialog.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QMessageBox \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qmessagebox.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qdialog.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QFileDialog \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qfiledialog.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qdir.h \
@@ -411,6 +409,8 @@ CMakeFiles/SF-Calculator.dir/MainWindow.cpp.o: \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qfile.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qfiledevice.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qurl.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtGui/QClipboard \
-  /usr/include/x86_64-linux-gnu/qt5/QtGui/qclipboard.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtGui/QGuiApplication
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/QStandardPaths \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qstandardpaths.h \
+  /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/SettingsDialog.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QDialog \
+  /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/HelpDialog.h

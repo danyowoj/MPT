@@ -61,13 +61,13 @@ private:
     TSettings *m_settings;
     THistory *m_history;
     TCtrlState m_state;
-    TFrac m_number;
+    TFrac m_lastValidNumber;  // последнее корректное число (для форматирования)
 
-    void updateFromEditor();
-    void updateEditor();
     void setState(TCtrlState newState);
     void handleError();
     void addHistoryEntry(const std::string &entry);
+    bool parseCurrentEditor(TFrac &out) const;
+    void updateLastValidFromEditor();  // обновить m_lastValidNumber из редактора, если строка валидна
 
 public:
     TCtrl(TSettings *settings = nullptr, THistory *history = nullptr);
@@ -88,6 +88,9 @@ public:
 
     void setSettings(TSettings *settings) { m_settings = settings; }
     void setHistory(THistory *history) { m_history = history; }
+
+    // Применить текущие настройки (формат отображения) к отображаемому числу
+    void applySettings();
 };
 
 #endif

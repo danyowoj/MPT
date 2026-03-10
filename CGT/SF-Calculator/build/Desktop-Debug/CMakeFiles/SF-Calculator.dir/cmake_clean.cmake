@@ -2,6 +2,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/SF-Calculator_autogen.dir/AutogenUsed.txt"
   "CMakeFiles/SF-Calculator_autogen.dir/ParseCache.txt"
   "SF-Calculator_autogen"
+  "CMakeFiles/SF-Calculator.dir/HelpDialog.cpp.o"
+  "CMakeFiles/SF-Calculator.dir/HelpDialog.cpp.o.d"
   "CMakeFiles/SF-Calculator.dir/MainWindow.cpp.o"
   "CMakeFiles/SF-Calculator.dir/MainWindow.cpp.o.d"
   "CMakeFiles/SF-Calculator.dir/SF-Calculator_autogen/mocs_compilation.cpp.o"

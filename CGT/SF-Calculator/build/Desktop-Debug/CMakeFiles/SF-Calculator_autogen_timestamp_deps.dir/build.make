@@ -67,8 +67,8 @@ include CMakeFiles/SF-Calculator_autogen_timestamp_deps.dir/compiler_depend.make
 include CMakeFiles/SF-Calculator_autogen_timestamp_deps.dir/progress.make
 
 CMakeFiles/SF-Calculator_autogen_timestamp_deps: /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.15.13
-CMakeFiles/SF-Calculator_autogen_timestamp_deps: /usr/lib/qt5/bin/uic
 CMakeFiles/SF-Calculator_autogen_timestamp_deps: /usr/lib/qt5/bin/moc
+CMakeFiles/SF-Calculator_autogen_timestamp_deps: /usr/lib/qt5/bin/uic
 
 SF-Calculator_autogen_timestamp_deps: CMakeFiles/SF-Calculator_autogen_timestamp_deps
 SF-Calculator_autogen_timestamp_deps: CMakeFiles/SF-Calculator_autogen_timestamp_deps.dir/build.make

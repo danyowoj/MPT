@@ -17,6 +17,8 @@ set(PROJECT_SOURCES
         MainWindow.cpp
         MainWindow.h
         MainWindow.ui
+        SettingsDialog.h
+        SettingsDialog.cpp
         include/CalcEnums.h
         include/THistory.h
         include/TProc.h
@@ -53,6 +55,7 @@ else()
         add_executable(SF-Calculator
             ${PROJECT_SOURCES}
             SettingsDialog.h SettingsDialog.cpp
+            HelpDialog.h HelpDialog.cpp
         )
     endif()
 endif()

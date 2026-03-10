@@ -1,8 +1,6 @@
 #include "../include/TSettings.h"
 #include <fstream>
-#include <sstream>
 #include <cctype>
-#include <algorithm>
 
 static std::string trim(const std::string &s)
 {
@@ -14,8 +12,12 @@ static std::string trim(const std::string &s)
 }
 
 TSettings::TSettings()
-    : m_displayFormat(DisplayFormat::Fraction), m_operandSource(OperandSource::Memory)
+    : m_displayFormat(DisplayFormat::Fraction)
+    , m_operandSource(OperandSource::Memory)
 {
+    // Значения по умолчанию для дополнительных настроек
+    m_extra.autoClear = false;
+    m_extra.historySize = 100;
 }
 
 DisplayFormat TSettings::displayFormat() const
@@ -28,6 +30,11 @@ OperandSource TSettings::operandSource() const
     return m_operandSource;
 }
 
+const ExtraSettings& TSettings::extra() const
+{
+    return m_extra;
+}
+
 void TSettings::setDisplayFormat(DisplayFormat fmt)
 {
     m_displayFormat = fmt;
@@ -36,6 +43,11 @@ void TSettings::setDisplayFormat(DisplayFormat fmt)
 void TSettings::setOperandSource(OperandSource src)
 {
     m_operandSource = src;
+}
+
+void TSettings::setExtra(const ExtraSettings& extra)
+{
+    m_extra = extra;
 }
 
 void TSettings::saveToFile(const std::string &filename) const
@@ -67,20 +79,24 @@ void TSettings::saveToFile(const std::string &filename) const
         break;
     }
     file << "\n";
+
+    // Дополнительные настройки
+    file << "autoClear=" << (m_extra.autoClear ? "true" : "false") << "\n";
+    file << "historySize=" << m_extra.historySize << "\n";
 }
 
 void TSettings::loadFromFile(const std::string &filename)
 {
     std::ifstream file(filename);
     if (!file.is_open())
-        return; // если файла нет, оставляем текущие настройки
+        return;
 
     std::string line;
     while (std::getline(file, line))
     {
         line = trim(line);
         if (line.empty() || line[0] == '#')
-            continue; // игнорируем комментарии и пустые строки
+            continue;
 
         auto eqPos = line.find('=');
         if (eqPos == std::string::npos)
@@ -102,6 +118,18 @@ void TSettings::loadFromFile(const std::string &filename)
                 m_operandSource = OperandSource::Memory;
             else if (value == "Clipboard")
                 m_operandSource = OperandSource::Clipboard;
+        }
+        else if (key == "autoClear")
+        {
+            m_extra.autoClear = (value == "true");
+        }
+        else if (key == "historySize")
+        {
+            try {
+                m_extra.historySize = std::stoi(value);
+            } catch (...) {
+                // игнорируем ошибку, оставляем предыдущее значение
+            }
         }
     }
 }

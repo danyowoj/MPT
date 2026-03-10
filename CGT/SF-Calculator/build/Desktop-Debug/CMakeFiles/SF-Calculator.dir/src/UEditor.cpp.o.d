@@ -137,15 +137,4 @@ CMakeFiles/SF-Calculator.dir/src/UEditor.cpp.o: \
   /usr/lib/llvm-18/lib/clang/18/include/__stddef_offsetof.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/uses_allocator.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/uses_allocator_args.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/tuple \
-  /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/src/../include/UFrac.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/cstdint \
-  /usr/lib/llvm-18/lib/clang/18/include/stdint.h /usr/include/stdint.h \
-  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
-  /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/stdexcept \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/exception \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/exception_ptr.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/cxxabi_init_exception.h \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/typeinfo \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/bits/nested_exception.h
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/tuple

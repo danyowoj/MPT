@@ -1,164 +1,181 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
-#include "SettingsDialog.h"
 #include <QMessageBox>
 #include <QFileDialog>
-#include <QClipboard>
-#include <QGuiApplication>
+#include <QStandardPaths>
+#include "SettingsDialog.h"
+#include "HelpDialog.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , m_ctrl(&m_settings, &m_history)
+    , m_settings(new TSettings())
+    , m_history(new THistory(100))
+    , m_ctrl(new TCtrl(m_settings, m_history))
+    , m_historyModel(new QStringListModel(this))
+    , m_clipboard()
 {
     ui->setupUi(this);
 
-    ui->viewHistory->setModel(&m_historyModel);
+    setWindowTitle(tr("Simple Fraction Calculator"));
 
-    QList<QPushButton*> digitButtons = {
-        ui->b0, ui->b1, ui->b2, ui->b3, ui->b4,
-        ui->b5, ui->b6, ui->b7, ui->b8, ui->b9
-    };
-    for (auto btn : digitButtons) {
-        connect(btn, &QPushButton::clicked, this, &MainWindow::onDigitClicked);
-    }
+    // Установка модели для списка истории
+    ui->viewHistory->setModel(m_historyModel);
 
-    connect(ui->bPlus, &QPushButton::clicked, this, &MainWindow::onAddClicked);
-    connect(ui->bMinus, &QPushButton::clicked, this, &MainWindow::onSubtractClicked);
-    connect(ui->bMultiply, &QPushButton::clicked, this, &MainWindow::onMultiplyClicked);
-    connect(ui->bDivide, &QPushButton::clicked, this, &MainWindow::onDivideClicked);
-    connect(ui->bEquals, &QPushButton::clicked, this, &MainWindow::onEqualsClicked);
+    // Связывание контроллера с настройками и историей
+    m_ctrl->setSettings(m_settings);
+    m_ctrl->setHistory(m_history);
 
-    connect(ui->bSquare, &QPushButton::clicked, this, &MainWindow::onSquareClicked);
-    connect(ui->bReciprocal, &QPushButton::clicked, this, &MainWindow::onReciprocalClicked);
-    connect(ui->bToggleSign, &QPushButton::clicked, this, &MainWindow::onToggleSignClicked);
+    // Первоначальное обновление интерфейса
+    updateDisplay();
+    updateHistory();
+    updateMemoryState();
 
-    connect(ui->bBackSpace, &QPushButton::clicked, this, &MainWindow::onBackspaceClicked);
-    connect(ui->bClear, &QPushButton::clicked, this, &MainWindow::onClearClicked);
-    connect(ui->bClearEntry, &QPushButton::clicked, this, &MainWindow::onClearEntryClicked);
-    connect(ui->bWholeDevider, &QPushButton::clicked, this, &MainWindow::onWholeSeparatorClicked);
+    // Подключение кнопок
+    setupButtons();
 
-    connect(ui->bMemoryStore, &QPushButton::clicked, this, &MainWindow::onMemoryStoreClicked);
-    connect(ui->bMemoryRecall, &QPushButton::clicked, this, &MainWindow::onMemoryRecallClicked);
-    connect(ui->bMemoryAdd, &QPushButton::clicked, this, &MainWindow::onMemoryAddClicked);
-    connect(ui->bMemoryClear, &QPushButton::clicked, this, &MainWindow::onMemoryClearClicked);
-
-    connect(ui->bCopy, &QPushButton::clicked, this, &MainWindow::onCopyClicked);
-    connect(ui->bPaste, &QPushButton::clicked, this, &MainWindow::onPasteClicked);
-
+    // Подключение действий меню
     connect(ui->actionSave, &QAction::triggered, this, &MainWindow::onActionSave);
     connect(ui->actionLoad, &QAction::triggered, this, &MainWindow::onActionLoad);
+    connect(ui->actionPreferences, &QAction::triggered, this, &MainWindow::onActionPreferences);
     connect(ui->actionHelp, &QAction::triggered, this, &MainWindow::onActionHelp);
     connect(ui->actionAuthors, &QAction::triggered, this, &MainWindow::onActionAuthors);
-
-    QAction *settingsAction = new QAction(tr("Configure..."), this);
-    connect(settingsAction, &QAction::triggered, this, &MainWindow::onSettingsClicked);
-    ui->menuSettings->addAction(settingsAction);
-
-    updateDisplay();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete m_ctrl;
+    delete m_history;
+    delete m_settings;
 }
 
-void MainWindow::sendCommand(int cmd)
+void MainWindow::setupButtons()
 {
-    QString clip = QGuiApplication::clipboard()->text();
-    std::string clipboard = clip.toStdString();
-    std::string memState; // больше не используем для обновления
-    std::string result = m_ctrl.executeCommand(cmd, clipboard, memState);
-    QGuiApplication::clipboard()->setText(QString::fromStdString(clipboard));
+    // Цифры
+    connect(ui->b0, &QPushButton::clicked, this, [this]() { handleCommand(CMD_0); });
+    connect(ui->b1, &QPushButton::clicked, this, [this]() { handleCommand(CMD_1); });
+    connect(ui->b2, &QPushButton::clicked, this, [this]() { handleCommand(CMD_2); });
+    connect(ui->b3, &QPushButton::clicked, this, [this]() { handleCommand(CMD_3); });
+    connect(ui->b4, &QPushButton::clicked, this, [this]() { handleCommand(CMD_4); });
+    connect(ui->b5, &QPushButton::clicked, this, [this]() { handleCommand(CMD_5); });
+    connect(ui->b6, &QPushButton::clicked, this, [this]() { handleCommand(CMD_6); });
+    connect(ui->b7, &QPushButton::clicked, this, [this]() { handleCommand(CMD_7); });
+    connect(ui->b8, &QPushButton::clicked, this, [this]() { handleCommand(CMD_8); });
+    connect(ui->b9, &QPushButton::clicked, this, [this]() { handleCommand(CMD_9); });
+
+    // Операции
+    connect(ui->bPlus, &QPushButton::clicked, this, [this]() { handleCommand(CMD_ADD); });
+    connect(ui->bMinus, &QPushButton::clicked, this, [this]() { handleCommand(CMD_SUBTRACT); });
+    connect(ui->bMultiply, &QPushButton::clicked, this, [this]() { handleCommand(CMD_MULTIPLY); });
+    connect(ui->bDivide, &QPushButton::clicked, this, [this]() { handleCommand(CMD_DIVIDE); });
+
+    // Функции
+    connect(ui->bSquare, &QPushButton::clicked, this, [this]() { handleCommand(CMD_SQR); });
+    connect(ui->bReciprocal, &QPushButton::clicked, this, [this]() { handleCommand(CMD_RECIPROCAL); });
+    connect(ui->bToggleSign, &QPushButton::clicked, this, [this]() { handleCommand(CMD_NEGATE); });
+
+    // Управление вводом
+    connect(ui->bClear, &QPushButton::clicked, this, [this]() { handleCommand(CMD_CLEAR); });
+    connect(ui->bClearEntry, &QPushButton::clicked, this, [this]() { handleCommand(CMD_CLEAR_ENTRY); });
+    connect(ui->bBackSpace, &QPushButton::clicked, this, [this]() { handleCommand(CMD_BACKSPACE); });
+    connect(ui->bWholeDevider, &QPushButton::clicked, this, [this]() { handleCommand(CMD_WHOLE_SEP); });
+
+    // Равенство
+    connect(ui->bEquals, &QPushButton::clicked, this, [this]() { handleCommand(CMD_EQUALS); });
+
+    // Память
+    connect(ui->bMemoryStore, &QPushButton::clicked, this, [this]() { handleCommand(CMD_MEM_STORE); });
+    connect(ui->bMemoryRecall, &QPushButton::clicked, this, [this]() { handleCommand(CMD_MEM_RECALL); });
+    connect(ui->bMemoryClear, &QPushButton::clicked, this, [this]() { handleCommand(CMD_MEM_CLEAR); });
+    connect(ui->bMemoryAdd, &QPushButton::clicked, this, [this]() { handleCommand(CMD_MEM_ADD); });
+
+    // Буфер обмена
+    connect(ui->bCopy, &QPushButton::clicked, this, [this]() { handleCommand(CMD_COPY); });
+    connect(ui->bPaste, &QPushButton::clicked, this, [this]() { handleCommand(CMD_PASTE); });
+}
+
+void MainWindow::handleCommand(int cmd)
+{
+    std::string memState;
+    std::string result = m_ctrl->executeCommand(cmd, m_clipboard, memState);
 
     ui->lineDisplay->setText(QString::fromStdString(result));
-    ui->lineMemoryState->setText(QString("Memory: %1").arg(QString::fromStdString(m_ctrl.getMemoryState())));
 
-    auto entries = m_history.getEntries();
-    QStringList list;
-    for (const auto& e : entries) {
-        list << QString::fromStdString(e);
-    }
-    m_historyModel.setStringList(list);
+    if (!memState.empty())
+        ui->lineMemoryState->setText(QString::fromStdString(memState));
+    else
+        updateMemoryState();
+
+    updateHistory();
 }
 
-void MainWindow::onDigitClicked()
+void MainWindow::updateDisplay()
 {
-    QPushButton *btn = qobject_cast<QPushButton*>(sender());
-    if (!btn) return;
-    int digit = btn->text().toInt();
-    sendCommand(digit);
+    ui->lineDisplay->setText(QString::fromStdString(m_ctrl->getDisplay()));
 }
 
-void MainWindow::onAddClicked() { sendCommand(CMD_ADD); }
-void MainWindow::onSubtractClicked() { sendCommand(CMD_SUBTRACT); }
-void MainWindow::onMultiplyClicked() { sendCommand(CMD_MULTIPLY); }
-void MainWindow::onDivideClicked() { sendCommand(CMD_DIVIDE); }
-void MainWindow::onEqualsClicked() { sendCommand(CMD_EQUALS); }
+void MainWindow::updateHistory()
+{
+    QStringList entries;
+    for (const auto &entry : m_history->getEntries())
+        entries << QString::fromStdString(entry);
+    m_historyModel->setStringList(entries);
+    ui->viewHistory->scrollToBottom();
+}
 
-void MainWindow::onSquareClicked() { sendCommand(CMD_SQR); }
-void MainWindow::onReciprocalClicked() { sendCommand(CMD_RECIPROCAL); }
-void MainWindow::onToggleSignClicked() { sendCommand(CMD_TOGGLE_SIGN); }
-
-void MainWindow::onBackspaceClicked() { sendCommand(CMD_BACKSPACE); }
-void MainWindow::onClearClicked() { sendCommand(CMD_CLEAR); }
-void MainWindow::onClearEntryClicked() { sendCommand(CMD_CLEAR_ENTRY); }
-void MainWindow::onWholeSeparatorClicked() { sendCommand(CMD_WHOLE_SEP); }
-
-void MainWindow::onMemoryStoreClicked() { sendCommand(CMD_MEM_STORE); }
-void MainWindow::onMemoryRecallClicked() { sendCommand(CMD_MEM_RECALL); }
-void MainWindow::onMemoryAddClicked() { sendCommand(CMD_MEM_ADD); }
-void MainWindow::onMemoryClearClicked() { sendCommand(CMD_MEM_CLEAR); }
-
-void MainWindow::onCopyClicked() { sendCommand(CMD_COPY); }
-void MainWindow::onPasteClicked() { sendCommand(CMD_PASTE); }
+void MainWindow::updateMemoryState()
+{
+    ui->lineMemoryState->setText(QString::fromStdString(m_ctrl->getMemoryState()));
+}
 
 void MainWindow::onActionSave()
 {
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save Settings"), "", tr("Config Files (*.cfg)"));
-    if (!fileName.isEmpty()) {
-        m_settings.saveToFile(fileName.toStdString());
+    QString fileName = QFileDialog::getSaveFileName(this,
+                                                    tr("Save Settings"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation),
+                                                    tr("Settings Files (*.ini);;All Files (*)"));
+    if (!fileName.isEmpty())
+    {
+        m_settings->saveToFile(fileName.toStdString());
+        QMessageBox::information(this, tr("Saved"), tr("Settings saved successfully."));
     }
 }
 
 void MainWindow::onActionLoad()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Load Settings"), "", tr("Config Files (*.cfg)"));
-    if (!fileName.isEmpty()) {
-        m_settings.loadFromFile(fileName.toStdString());
+    QString fileName = QFileDialog::getOpenFileName(this,
+                                                    tr("Load Settings"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation),
+                                                    tr("Settings Files (*.ini);;All Files (*)"));
+    if (!fileName.isEmpty())
+    {
+        m_settings->loadFromFile(fileName.toStdString());
+        m_history->setMaxSize(m_settings->extra().historySize);
+        m_ctrl->applySettings();
+        updateDisplay();
+        QMessageBox::information(this, tr("Loaded"), tr("Settings loaded successfully."));
+    }
+}
+
+void MainWindow::onActionPreferences()
+{
+    SettingsDialog dialog(*m_settings, this);
+    if (dialog.exec() == QDialog::Accepted)
+    {
+        *m_settings = dialog.getSettings();
+        m_history->setMaxSize(m_settings->extra().historySize);
+        m_ctrl->applySettings();
         updateDisplay();
     }
 }
 
 void MainWindow::onActionHelp()
 {
-    QMessageBox::information(this, tr("Help"), tr(
-                                                   "Simple Fraction Calculator\n\n"
-                                                   "Enter numbers using digit buttons.\n"
-                                                   "Use '|' for whole part separator.\n"
-                                                   "Operations: +, -, *, /, x^2, 1/x, +/-.\n"
-                                                   "Memory: MS (store), MR (recall), MC (clear), M+ (add).\n"
-                                                   "Copy/Paste via clipboard buttons.\n"
-                                                   "History is shown on the left."
-                                                   ));
+    HelpDialog help(this);
+    help.exec();
 }
 
 void MainWindow::onActionAuthors()
 {
-    QMessageBox::information(this, tr("Authors"), tr("Developed by danyowoj & opepl."));
-}
-
-void MainWindow::onSettingsClicked()
-{
-    SettingsDialog dialog(m_settings, this);
-    if (dialog.exec() == QDialog::Accepted) {
-        updateDisplay();
-    }
-}
-
-void MainWindow::updateDisplay()
-{
-    std::string display = m_ctrl.getDisplay();
-    ui->lineDisplay->setText(QString::fromStdString(display));
-    ui->lineMemoryState->setText(QString("Memory: %1").arg(QString::fromStdString(m_ctrl.getMemoryState())));
+    QMessageBox::information(this, tr("Authors"),
+                             tr("Developed by danyowoj & opepl"));
 }

@@ -3,9 +3,9 @@
 
 #include <QMainWindow>
 #include <QStringListModel>
-#include "include/UCtrl.h"
 #include "include/TSettings.h"
 #include "include/THistory.h"
+#include "include/UCtrl.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -20,41 +20,25 @@ public:
     ~MainWindow();
 
 private slots:
-    void onDigitClicked();
-    void onAddClicked();
-    void onSubtractClicked();
-    void onMultiplyClicked();
-    void onDivideClicked();
-    void onEqualsClicked();
-    void onSquareClicked();
-    void onReciprocalClicked();
-    void onToggleSignClicked();
-    void onBackspaceClicked();
-    void onClearClicked();
-    void onClearEntryClicked();
-    void onWholeSeparatorClicked();   // для кнопки '|'
-    void onMemoryStoreClicked();
-    void onMemoryRecallClicked();
-    void onMemoryAddClicked();
-    void onMemoryClearClicked();
-    void onCopyClicked();
-    void onPasteClicked();
+    void handleCommand(int cmd);
     void onActionSave();
     void onActionLoad();
+    void onActionPreferences();
     void onActionHelp();
     void onActionAuthors();
-    void onSettingsClicked();          // новый слот для диалога настроек
-
-    void updateDisplay();
 
 private:
-    Ui::MainWindow *ui;
-    TSettings m_settings;
-    THistory m_history;
-    TCtrl m_ctrl;
-    QStringListModel m_historyModel;
+    void updateDisplay();
+    void updateHistory();
+    void updateMemoryState();
+    void setupButtons();
 
-    void sendCommand(int cmd);
+    Ui::MainWindow *ui;
+    TSettings *m_settings;
+    THistory *m_history;
+    TCtrl *m_ctrl;
+    QStringListModel *m_historyModel;
+    std::string m_clipboard;
 };
 
-#endif
+#endif // MAINWINDOW_H

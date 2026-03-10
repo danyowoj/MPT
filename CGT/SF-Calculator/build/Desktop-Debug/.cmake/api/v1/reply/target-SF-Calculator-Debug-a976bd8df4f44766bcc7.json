@@ -31,19 +31,19 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 53,
+				"line" : 55,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 76,
+				"line" : 80,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 59,
+				"line" : 63,
 				"parent" : 0
 			},
 			{
@@ -154,12 +154,14 @@
 				0,
 				1,
 				2,
-				13,
-				14,
+				6,
 				15,
 				16,
 				17,
-				18
+				18,
+				19,
+				20,
+				22
 			]
 		}
 	],
@@ -234,12 +236,14 @@
 				0,
 				1,
 				2,
-				13,
-				14,
+				6,
 				15,
 				16,
 				17,
-				18
+				18,
+				19,
+				20,
+				22
 			]
 		},
 		{
@@ -248,14 +252,16 @@
 			[
 				3,
 				5,
-				6,
 				7,
 				8,
 				9,
 				10,
 				11,
 				12,
-				19
+				13,
+				14,
+				21,
+				23
 			]
 		},
 		{
@@ -263,14 +269,14 @@
 			"sourceIndexes" : 
 			[
 				4,
-				20
+				24
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				21
+				25
 			]
 		}
 	],
@@ -304,6 +310,17 @@
 			"backtrace" : 1,
 			"path" : "MainWindow.ui",
 			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "SettingsDialog.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "SettingsDialog.cpp",
+			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
@@ -379,6 +396,17 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "src/UFrac.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "HelpDialog.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "HelpDialog.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{

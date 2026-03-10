@@ -13,12 +13,13 @@ public:
 
     bool isZero() const { return m_str == "0/1"; }
     std::string getString() const { return m_str; }
-    void setString(const std::string &s) { m_str = s; } // больше не заменяем пустую строку
+    void setString(const std::string &s) { m_str = s; }
 
     std::string toggleSign();
     std::string addDigit(int digit);
     std::string addZero() { return addDigit(0); }
     std::string addWholeSeparator();
+    std::string addSlash();          // новый метод для добавления '/'
     std::string backspace();
     std::string clear();
 

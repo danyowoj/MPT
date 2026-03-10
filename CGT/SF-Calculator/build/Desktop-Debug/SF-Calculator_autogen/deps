@@ -1,5 +1,7 @@
 SF-Calculator_autogen/timestamp: \
 	/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/CMakeLists.txt \
+	/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/HelpDialog.cpp \
+	/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/HelpDialog.h \
 	/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/MainWindow.cpp \
 	/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/MainWindow.h \
 	/home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/SettingsDialog.cpp \

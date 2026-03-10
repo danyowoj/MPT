@@ -338,14 +338,14 @@ CMakeFiles/SF-Calculator.dir/main.cpp.o: \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qvariant.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qmap.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/13/../../../../include/c++/13/variant \
+  /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/include/TSettings.h \
+  /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/include/UFrac.h \
+  /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/include/THistory.h \
   /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/include/UCtrl.h \
   /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/include/TProc.h \
-  /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/include/UFrac.h \
   /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/include/CalcEnums.h \
   /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/include/UEditor.h \
   /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/include/UMemory.h \
-  /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/include/TSettings.h \
-  /home/danyowoj/Documents/Uni/MPT/CGT/SF-Calculator/include/THistory.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QApplication \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qapplication.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qcoreapplication.h \
