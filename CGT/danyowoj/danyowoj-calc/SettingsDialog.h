@@ -21,7 +21,7 @@ private:
 
     TSettings m_originalSettings;
     QComboBox *m_cmbDisplayFormat;
-    QComboBox *m_cmbOperandSource;
+    QCheckBox *m_chkAutoClear;
     QSpinBox *m_spinHistorySize;
     QCheckBox *m_chkSoundEnabled;
     QDialogButtonBox *m_buttonBox;

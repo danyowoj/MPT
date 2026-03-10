@@ -51,12 +51,6 @@ HelpDialog::HelpDialog(QWidget *parent)
         "<li>Memory state is shown in the status line as <i>_On</i> (value present) or <i>_Off</i> (empty).</li>"
         "</ul>"
 
-        "<h3>Clipboard</h3>"
-        "<ul>"
-        "<li><b>Copy</b> – Copy current display to clipboard (as text)</li>"
-        "<li><b>Paste</b> – Paste a fraction from clipboard (must be in valid format)</li>"
-        "</ul>"
-
         "<h3>Editing</h3>"
         "<ul>"
         "<li><b>←</b> – Backspace: delete the last character</li>"
@@ -74,8 +68,7 @@ HelpDialog::HelpDialog(QWidget *parent)
         "<p>Use the <b>Settings</b> menu to:</p>"
         "<ul>"
         "<li>Choose display format: always as fraction, or as decimal if the result is a terminating decimal.</li>"
-        "<li>Select operand source for operations (memory or clipboard).</li>"
-        "<li>Adjust extra options: auto‑clear after equals, history size, sound on/off.</li>"
+        "<li>Adjust extra options: history size.</li>"
         "<li>Save or load your preferences to/from a file.</li>"
         "</ul>"
 

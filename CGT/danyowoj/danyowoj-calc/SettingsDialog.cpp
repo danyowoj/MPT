@@ -16,7 +16,6 @@ SettingsDialog::SettingsDialog(const TSettings &settings, QWidget *parent)
 
     // Устанавливаем текущие значения из настроек
     m_cmbDisplayFormat->setCurrentIndex(static_cast<int>(m_originalSettings.displayFormat()));
-    m_cmbOperandSource->setCurrentIndex(static_cast<int>(m_originalSettings.operandSource()));
     m_spinHistorySize->setValue(m_originalSettings.extra().historySize);
 }
 
@@ -34,16 +33,6 @@ void SettingsDialog::setupUI()
     displayLayout->addWidget(new QLabel(tr("Display format:")));
     displayLayout->addWidget(m_cmbDisplayFormat);
     mainLayout->addWidget(displayGroup);
-
-    // ---- Группа операций ----
-    QGroupBox *operationGroup = new QGroupBox(tr("Operations"));
-    QVBoxLayout *operationLayout = new QVBoxLayout(operationGroup);
-    m_cmbOperandSource = new QComboBox();
-    m_cmbOperandSource->addItem(tr("Memory"));
-    m_cmbOperandSource->addItem(tr("Clipboard"));
-    operationLayout->addWidget(new QLabel(tr("Operand source:")));
-    operationLayout->addWidget(m_cmbOperandSource);
-    mainLayout->addWidget(operationGroup);
 
     // ---- Группа дополнительных настроек ----
     QGroupBox *extraGroup = new QGroupBox(tr("Extra"));
@@ -70,7 +59,6 @@ TSettings SettingsDialog::getSettings() const
 {
     TSettings result = m_originalSettings;
     result.setDisplayFormat(static_cast<DisplayFormat>(m_cmbDisplayFormat->currentIndex()));
-    result.setOperandSource(static_cast<OperandSource>(m_cmbOperandSource->currentIndex()));
 
     ExtraSettings extra;
     extra.historySize = m_spinHistorySize->value();
