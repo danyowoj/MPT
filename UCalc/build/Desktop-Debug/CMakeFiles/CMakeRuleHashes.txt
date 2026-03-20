@@ -1,0 +1,4 @@
+# Hashes of file build rules.
+a66b29ba897e83135e7a80b08fc259a1 CMakeFiles/UCalc_autogen
+a66b29ba897e83135e7a80b08fc259a1 CMakeFiles/UCalc_autogen_timestamp_deps
+82489400985b116773ac5179abe9d310 UCalc_autogen/timestamp
