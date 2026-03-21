@@ -9,7 +9,11 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "" "UCalc_autogen/timestamp" "custom" "UCalc_autogen/deps"
+  "/home/danyowoj/Documents/Uni/MPT/UCalc/CEditor.cpp" "CMakeFiles/UCalc.dir/CEditor.cpp.o" "gcc" "CMakeFiles/UCalc.dir/CEditor.cpp.o.d"
+  "/home/danyowoj/Documents/Uni/MPT/UCalc/FEditor.cpp" "CMakeFiles/UCalc.dir/FEditor.cpp.o" "gcc" "CMakeFiles/UCalc.dir/FEditor.cpp.o.d"
   "/home/danyowoj/Documents/Uni/MPT/UCalc/MainWindow.cpp" "CMakeFiles/UCalc.dir/MainWindow.cpp.o" "gcc" "CMakeFiles/UCalc.dir/MainWindow.cpp.o.d"
+  "/home/danyowoj/Documents/Uni/MPT/UCalc/PEditor.cpp" "CMakeFiles/UCalc.dir/PEditor.cpp.o" "gcc" "CMakeFiles/UCalc.dir/PEditor.cpp.o.d"
+  "/home/danyowoj/Documents/Uni/MPT/UCalc/TAEditor.cpp" "CMakeFiles/UCalc.dir/TAEditor.cpp.o" "gcc" "CMakeFiles/UCalc.dir/TAEditor.cpp.o.d"
   "/home/danyowoj/Documents/Uni/MPT/UCalc/TComplex.cpp" "CMakeFiles/UCalc.dir/TComplex.cpp.o" "gcc" "CMakeFiles/UCalc.dir/TComplex.cpp.o.d"
   "/home/danyowoj/Documents/Uni/MPT/UCalc/TFrac.cpp" "CMakeFiles/UCalc.dir/TFrac.cpp.o" "gcc" "CMakeFiles/UCalc.dir/TFrac.cpp.o.d"
   "/home/danyowoj/Documents/Uni/MPT/UCalc/TPNumber.cpp" "CMakeFiles/UCalc.dir/TPNumber.cpp.o" "gcc" "CMakeFiles/UCalc.dir/TPNumber.cpp.o.d"

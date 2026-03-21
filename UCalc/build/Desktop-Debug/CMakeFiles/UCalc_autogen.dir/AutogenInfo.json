@@ -79,9 +79,33 @@
 	"HEADERS" : 
 	[
 		[
+			"/home/danyowoj/Documents/Uni/MPT/UCalc/CEditor.h",
+			"MU",
+			"EWIEGA46WW/moc_CEditor.cpp",
+			null
+		],
+		[
+			"/home/danyowoj/Documents/Uni/MPT/UCalc/FEditor.h",
+			"MU",
+			"EWIEGA46WW/moc_FEditor.cpp",
+			null
+		],
+		[
 			"/home/danyowoj/Documents/Uni/MPT/UCalc/MainWindow.h",
 			"MU",
 			"EWIEGA46WW/moc_MainWindow.cpp",
+			null
+		],
+		[
+			"/home/danyowoj/Documents/Uni/MPT/UCalc/PEditor.h",
+			"MU",
+			"EWIEGA46WW/moc_PEditor.cpp",
+			null
+		],
+		[
+			"/home/danyowoj/Documents/Uni/MPT/UCalc/TAEditor.h",
+			"MU",
+			"EWIEGA46WW/moc_TAEditor.cpp",
 			null
 		],
 		[
@@ -160,7 +184,11 @@
 	"SETTINGS_FILE" : "/home/danyowoj/Documents/Uni/MPT/UCalc/build/Desktop-Debug/CMakeFiles/UCalc_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[ "/home/danyowoj/Documents/Uni/MPT/UCalc/CEditor.cpp", "MU", null ],
+		[ "/home/danyowoj/Documents/Uni/MPT/UCalc/FEditor.cpp", "MU", null ],
 		[ "/home/danyowoj/Documents/Uni/MPT/UCalc/MainWindow.cpp", "MU", null ],
+		[ "/home/danyowoj/Documents/Uni/MPT/UCalc/PEditor.cpp", "MU", null ],
+		[ "/home/danyowoj/Documents/Uni/MPT/UCalc/TAEditor.cpp", "MU", null ],
 		[ "/home/danyowoj/Documents/Uni/MPT/UCalc/TComplex.cpp", "MU", null ],
 		[ "/home/danyowoj/Documents/Uni/MPT/UCalc/TFrac.cpp", "MU", null ],
 		[ "/home/danyowoj/Documents/Uni/MPT/UCalc/TPNumber.cpp", "MU", null ],

@@ -160,6 +160,62 @@ CMakeFiles/UCalc.dir/TComplex.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UCalc.dir/TComplex.cpp.s"
 	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/danyowoj/Documents/Uni/MPT/UCalc/TComplex.cpp -o CMakeFiles/UCalc.dir/TComplex.cpp.s
 
+CMakeFiles/UCalc.dir/TAEditor.cpp.o: CMakeFiles/UCalc.dir/flags.make
+CMakeFiles/UCalc.dir/TAEditor.cpp.o: /home/danyowoj/Documents/Uni/MPT/UCalc/TAEditor.cpp
+CMakeFiles/UCalc.dir/TAEditor.cpp.o: CMakeFiles/UCalc.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/danyowoj/Documents/Uni/MPT/UCalc/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/UCalc.dir/TAEditor.cpp.o"
+	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/UCalc.dir/TAEditor.cpp.o -MF CMakeFiles/UCalc.dir/TAEditor.cpp.o.d -o CMakeFiles/UCalc.dir/TAEditor.cpp.o -c /home/danyowoj/Documents/Uni/MPT/UCalc/TAEditor.cpp
+
+CMakeFiles/UCalc.dir/TAEditor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UCalc.dir/TAEditor.cpp.i"
+	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/danyowoj/Documents/Uni/MPT/UCalc/TAEditor.cpp > CMakeFiles/UCalc.dir/TAEditor.cpp.i
+
+CMakeFiles/UCalc.dir/TAEditor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UCalc.dir/TAEditor.cpp.s"
+	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/danyowoj/Documents/Uni/MPT/UCalc/TAEditor.cpp -o CMakeFiles/UCalc.dir/TAEditor.cpp.s
+
+CMakeFiles/UCalc.dir/PEditor.cpp.o: CMakeFiles/UCalc.dir/flags.make
+CMakeFiles/UCalc.dir/PEditor.cpp.o: /home/danyowoj/Documents/Uni/MPT/UCalc/PEditor.cpp
+CMakeFiles/UCalc.dir/PEditor.cpp.o: CMakeFiles/UCalc.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/danyowoj/Documents/Uni/MPT/UCalc/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/UCalc.dir/PEditor.cpp.o"
+	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/UCalc.dir/PEditor.cpp.o -MF CMakeFiles/UCalc.dir/PEditor.cpp.o.d -o CMakeFiles/UCalc.dir/PEditor.cpp.o -c /home/danyowoj/Documents/Uni/MPT/UCalc/PEditor.cpp
+
+CMakeFiles/UCalc.dir/PEditor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UCalc.dir/PEditor.cpp.i"
+	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/danyowoj/Documents/Uni/MPT/UCalc/PEditor.cpp > CMakeFiles/UCalc.dir/PEditor.cpp.i
+
+CMakeFiles/UCalc.dir/PEditor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UCalc.dir/PEditor.cpp.s"
+	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/danyowoj/Documents/Uni/MPT/UCalc/PEditor.cpp -o CMakeFiles/UCalc.dir/PEditor.cpp.s
+
+CMakeFiles/UCalc.dir/FEditor.cpp.o: CMakeFiles/UCalc.dir/flags.make
+CMakeFiles/UCalc.dir/FEditor.cpp.o: /home/danyowoj/Documents/Uni/MPT/UCalc/FEditor.cpp
+CMakeFiles/UCalc.dir/FEditor.cpp.o: CMakeFiles/UCalc.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/danyowoj/Documents/Uni/MPT/UCalc/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/UCalc.dir/FEditor.cpp.o"
+	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/UCalc.dir/FEditor.cpp.o -MF CMakeFiles/UCalc.dir/FEditor.cpp.o.d -o CMakeFiles/UCalc.dir/FEditor.cpp.o -c /home/danyowoj/Documents/Uni/MPT/UCalc/FEditor.cpp
+
+CMakeFiles/UCalc.dir/FEditor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UCalc.dir/FEditor.cpp.i"
+	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/danyowoj/Documents/Uni/MPT/UCalc/FEditor.cpp > CMakeFiles/UCalc.dir/FEditor.cpp.i
+
+CMakeFiles/UCalc.dir/FEditor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UCalc.dir/FEditor.cpp.s"
+	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/danyowoj/Documents/Uni/MPT/UCalc/FEditor.cpp -o CMakeFiles/UCalc.dir/FEditor.cpp.s
+
+CMakeFiles/UCalc.dir/CEditor.cpp.o: CMakeFiles/UCalc.dir/flags.make
+CMakeFiles/UCalc.dir/CEditor.cpp.o: /home/danyowoj/Documents/Uni/MPT/UCalc/CEditor.cpp
+CMakeFiles/UCalc.dir/CEditor.cpp.o: CMakeFiles/UCalc.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/danyowoj/Documents/Uni/MPT/UCalc/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/UCalc.dir/CEditor.cpp.o"
+	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/UCalc.dir/CEditor.cpp.o -MF CMakeFiles/UCalc.dir/CEditor.cpp.o.d -o CMakeFiles/UCalc.dir/CEditor.cpp.o -c /home/danyowoj/Documents/Uni/MPT/UCalc/CEditor.cpp
+
+CMakeFiles/UCalc.dir/CEditor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/UCalc.dir/CEditor.cpp.i"
+	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/danyowoj/Documents/Uni/MPT/UCalc/CEditor.cpp > CMakeFiles/UCalc.dir/CEditor.cpp.i
+
+CMakeFiles/UCalc.dir/CEditor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/UCalc.dir/CEditor.cpp.s"
+	/usr/bin/clang++-18 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/danyowoj/Documents/Uni/MPT/UCalc/CEditor.cpp -o CMakeFiles/UCalc.dir/CEditor.cpp.s
+
 # Object files for target UCalc
 UCalc_OBJECTS = \
 "CMakeFiles/UCalc.dir/UCalc_autogen/mocs_compilation.cpp.o" \
@@ -167,7 +223,11 @@ UCalc_OBJECTS = \
 "CMakeFiles/UCalc.dir/MainWindow.cpp.o" \
 "CMakeFiles/UCalc.dir/TPNumber.cpp.o" \
 "CMakeFiles/UCalc.dir/TFrac.cpp.o" \
-"CMakeFiles/UCalc.dir/TComplex.cpp.o"
+"CMakeFiles/UCalc.dir/TComplex.cpp.o" \
+"CMakeFiles/UCalc.dir/TAEditor.cpp.o" \
+"CMakeFiles/UCalc.dir/PEditor.cpp.o" \
+"CMakeFiles/UCalc.dir/FEditor.cpp.o" \
+"CMakeFiles/UCalc.dir/CEditor.cpp.o"
 
 # External object files for target UCalc
 UCalc_EXTERNAL_OBJECTS =
@@ -178,12 +238,16 @@ UCalc: CMakeFiles/UCalc.dir/MainWindow.cpp.o
 UCalc: CMakeFiles/UCalc.dir/TPNumber.cpp.o
 UCalc: CMakeFiles/UCalc.dir/TFrac.cpp.o
 UCalc: CMakeFiles/UCalc.dir/TComplex.cpp.o
+UCalc: CMakeFiles/UCalc.dir/TAEditor.cpp.o
+UCalc: CMakeFiles/UCalc.dir/PEditor.cpp.o
+UCalc: CMakeFiles/UCalc.dir/FEditor.cpp.o
+UCalc: CMakeFiles/UCalc.dir/CEditor.cpp.o
 UCalc: CMakeFiles/UCalc.dir/build.make
 UCalc: /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.15.13
 UCalc: /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.15.13
 UCalc: /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.15.13
 UCalc: CMakeFiles/UCalc.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/danyowoj/Documents/Uni/MPT/UCalc/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable UCalc"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/danyowoj/Documents/Uni/MPT/UCalc/build/Desktop-Debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable UCalc"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/UCalc.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -43,6 +43,10 @@ else()
             TFrac.h TFrac.cpp
             TComplex.h TComplex.cpp
             TANumber.h
+            TAEditor.h TAEditor.cpp
+            PEditor.h PEditor.cpp
+            FEditor.h FEditor.cpp
+            CEditor.h CEditor.cpp
         )
     endif()
 endif()
