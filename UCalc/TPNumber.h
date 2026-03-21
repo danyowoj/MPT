@@ -33,6 +33,8 @@ public:
 
     TANumber *copy() const override;
 
+    TANumber *zero() const override;
+
     std::string toString() const override;
     void fromString(const std::string &str) override;
 

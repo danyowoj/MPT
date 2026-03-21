@@ -16,7 +16,9 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/danyowoj/Documents/Uni/MPT/UCalc/TAEditor.cpp" "CMakeFiles/UCalc.dir/TAEditor.cpp.o" "gcc" "CMakeFiles/UCalc.dir/TAEditor.cpp.o.d"
   "/home/danyowoj/Documents/Uni/MPT/UCalc/TComplex.cpp" "CMakeFiles/UCalc.dir/TComplex.cpp.o" "gcc" "CMakeFiles/UCalc.dir/TComplex.cpp.o.d"
   "/home/danyowoj/Documents/Uni/MPT/UCalc/TFrac.cpp" "CMakeFiles/UCalc.dir/TFrac.cpp.o" "gcc" "CMakeFiles/UCalc.dir/TFrac.cpp.o.d"
+  "/home/danyowoj/Documents/Uni/MPT/UCalc/TMemory.cpp" "CMakeFiles/UCalc.dir/TMemory.cpp.o" "gcc" "CMakeFiles/UCalc.dir/TMemory.cpp.o.d"
   "/home/danyowoj/Documents/Uni/MPT/UCalc/TPNumber.cpp" "CMakeFiles/UCalc.dir/TPNumber.cpp.o" "gcc" "CMakeFiles/UCalc.dir/TPNumber.cpp.o.d"
+  "/home/danyowoj/Documents/Uni/MPT/UCalc/TProc.cpp" "CMakeFiles/UCalc.dir/TProc.cpp.o" "gcc" "CMakeFiles/UCalc.dir/TProc.cpp.o.d"
   "/home/danyowoj/Documents/Uni/MPT/UCalc/build/Desktop-Debug/UCalc_autogen/mocs_compilation.cpp" "CMakeFiles/UCalc.dir/UCalc_autogen/mocs_compilation.cpp.o" "gcc" "CMakeFiles/UCalc.dir/UCalc_autogen/mocs_compilation.cpp.o.d"
   "/home/danyowoj/Documents/Uni/MPT/UCalc/main.cpp" "CMakeFiles/UCalc.dir/main.cpp.o" "gcc" "CMakeFiles/UCalc.dir/main.cpp.o.d"
   )

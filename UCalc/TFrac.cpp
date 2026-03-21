@@ -155,3 +155,8 @@ void TFrac::fromString(const std::string &str)
     normalize();
     reduce();
 }
+
+TANumber *TFrac::zero() const
+{
+    return new TFrac(0, 1);
+}

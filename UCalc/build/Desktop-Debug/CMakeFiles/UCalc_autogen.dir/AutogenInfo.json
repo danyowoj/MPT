@@ -127,9 +127,21 @@
 			null
 		],
 		[
+			"/home/danyowoj/Documents/Uni/MPT/UCalc/TMemory.h",
+			"MU",
+			"EWIEGA46WW/moc_TMemory.cpp",
+			null
+		],
+		[
 			"/home/danyowoj/Documents/Uni/MPT/UCalc/TPNumber.h",
 			"MU",
 			"EWIEGA46WW/moc_TPNumber.cpp",
+			null
+		],
+		[
+			"/home/danyowoj/Documents/Uni/MPT/UCalc/TProc.h",
+			"MU",
+			"EWIEGA46WW/moc_TProc.cpp",
 			null
 		]
 	],
@@ -191,7 +203,9 @@
 		[ "/home/danyowoj/Documents/Uni/MPT/UCalc/TAEditor.cpp", "MU", null ],
 		[ "/home/danyowoj/Documents/Uni/MPT/UCalc/TComplex.cpp", "MU", null ],
 		[ "/home/danyowoj/Documents/Uni/MPT/UCalc/TFrac.cpp", "MU", null ],
+		[ "/home/danyowoj/Documents/Uni/MPT/UCalc/TMemory.cpp", "MU", null ],
 		[ "/home/danyowoj/Documents/Uni/MPT/UCalc/TPNumber.cpp", "MU", null ],
+		[ "/home/danyowoj/Documents/Uni/MPT/UCalc/TProc.cpp", "MU", null ],
 		[ "/home/danyowoj/Documents/Uni/MPT/UCalc/main.cpp", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],

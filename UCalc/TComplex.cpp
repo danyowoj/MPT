@@ -125,3 +125,8 @@ void TComplex::fromString(const std::string &str)
     if (sign == '-')
         im = -im;
 }
+
+TANumber *TComplex::zero() const
+{
+    return new TComplex(0.0, 0.0);
+}

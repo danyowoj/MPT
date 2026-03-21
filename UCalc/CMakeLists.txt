@@ -47,6 +47,9 @@ else()
             PEditor.h PEditor.cpp
             FEditor.h FEditor.cpp
             CEditor.h CEditor.cpp
+            TMemory.h TMemory.cpp
+            TProc.h TProc.cpp
+
         )
     endif()
 endif()

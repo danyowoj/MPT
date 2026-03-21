@@ -185,3 +185,8 @@ void TPNumber::fromString(const std::string &str)
 {
     value = parseString(str);
 }
+
+TANumber *TPNumber::zero() const
+{
+    return new TPNumber(0.0, base);
+}

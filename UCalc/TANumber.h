@@ -28,6 +28,9 @@ public:
     // Преобразование в строку и из строки
     virtual std::string toString() const = 0;
     virtual void fromString(const std::string &str) = 0;
+
+    // Создать копию числа, равного нулю
+    virtual TANumber *zero() const = 0;
 };
 
 #endif
