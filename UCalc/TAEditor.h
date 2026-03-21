@@ -2,6 +2,10 @@
 #define TAEDITOR_H
 
 #include <string>
+#include "TANumber.h"
+#include "TPNumber.h"
+#include "TFrac.h"
+#include "TComplex.h"
 
 // Константы команд редактора
 const unsigned cZero = 0;
@@ -43,6 +47,9 @@ public:
 
     // Универсальный метод выполнения команды
     std::string executeCommand(unsigned cmd);
+
+    // Создать число из текущей строки
+    virtual TANumber *createNumber() const = 0;
 };
 
 #endif

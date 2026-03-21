@@ -216,3 +216,8 @@ void CEditor::setString(const std::string &str)
     fNumber = str;
     updateFlags();
 }
+
+TANumber *CEditor::createNumber() const
+{
+    return new TComplex(fNumber);
+}

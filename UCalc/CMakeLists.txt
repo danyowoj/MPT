@@ -49,6 +49,8 @@ else()
             CEditor.h CEditor.cpp
             TMemory.h TMemory.cpp
             TProc.h TProc.cpp
+            CalcCommands.h
+            TCtrl.h TCtrl.cpp
 
         )
     endif()

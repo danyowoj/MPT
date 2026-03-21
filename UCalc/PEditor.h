@@ -30,6 +30,8 @@ public:
 
     int getBase() const { return base; }
     void setBase(int b); // смена основания (сброс)
+
+    TANumber *createNumber() const override;
 };
 
 #endif

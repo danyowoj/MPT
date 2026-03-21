@@ -142,3 +142,8 @@ void FEditor::setString(const std::string &str)
     fNumber = str;
     updateFlags();
 }
+
+TANumber *FEditor::createNumber() const
+{
+    return new TFrac(fNumber);
+}

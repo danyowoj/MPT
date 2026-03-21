@@ -7,7 +7,7 @@
 				{
 					"build" : ".",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-.-Debug-901d2b45720d2683e409.json",
+					"jsonFile" : "directory-.-Debug-241701481f4f14695528.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.5"
@@ -44,7 +44,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "UCalc::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-UCalc-Debug-7f9e853bbfd21b1f6e19.json",
+					"jsonFile" : "target-UCalc-Debug-7af9d3bfadb07c4225eb.json",
 					"name" : "UCalc",
 					"projectIndex" : 0
 				},

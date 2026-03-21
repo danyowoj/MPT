@@ -85,6 +85,12 @@
 			null
 		],
 		[
+			"/home/danyowoj/Documents/Uni/MPT/UCalc/CalcCommands.h",
+			"MU",
+			"EWIEGA46WW/moc_CalcCommands.cpp",
+			null
+		],
+		[
 			"/home/danyowoj/Documents/Uni/MPT/UCalc/FEditor.h",
 			"MU",
 			"EWIEGA46WW/moc_FEditor.cpp",
@@ -118,6 +124,12 @@
 			"/home/danyowoj/Documents/Uni/MPT/UCalc/TComplex.h",
 			"MU",
 			"EWIEGA46WW/moc_TComplex.cpp",
+			null
+		],
+		[
+			"/home/danyowoj/Documents/Uni/MPT/UCalc/TCtrl.h",
+			"MU",
+			"EWIEGA46WW/moc_TCtrl.cpp",
 			null
 		],
 		[
@@ -202,6 +214,7 @@
 		[ "/home/danyowoj/Documents/Uni/MPT/UCalc/PEditor.cpp", "MU", null ],
 		[ "/home/danyowoj/Documents/Uni/MPT/UCalc/TAEditor.cpp", "MU", null ],
 		[ "/home/danyowoj/Documents/Uni/MPT/UCalc/TComplex.cpp", "MU", null ],
+		[ "/home/danyowoj/Documents/Uni/MPT/UCalc/TCtrl.cpp", "MU", null ],
 		[ "/home/danyowoj/Documents/Uni/MPT/UCalc/TFrac.cpp", "MU", null ],
 		[ "/home/danyowoj/Documents/Uni/MPT/UCalc/TMemory.cpp", "MU", null ],
 		[ "/home/danyowoj/Documents/Uni/MPT/UCalc/TPNumber.cpp", "MU", null ],

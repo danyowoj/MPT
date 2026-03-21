@@ -195,3 +195,8 @@ void PEditor::setBase(int b)
         clear(); // сбрасываем ввод
     }
 }
+
+TANumber *PEditor::createNumber() const
+{
+    return new TPNumber(fNumber, base);
+}

@@ -26,6 +26,8 @@ public:
 
     std::string getString() const override;
     void setString(const std::string &str) override;
+
+    TANumber *createNumber() const override;
 };
 
 #endif

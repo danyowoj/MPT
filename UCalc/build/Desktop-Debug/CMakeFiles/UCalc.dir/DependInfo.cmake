@@ -15,6 +15,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/danyowoj/Documents/Uni/MPT/UCalc/PEditor.cpp" "CMakeFiles/UCalc.dir/PEditor.cpp.o" "gcc" "CMakeFiles/UCalc.dir/PEditor.cpp.o.d"
   "/home/danyowoj/Documents/Uni/MPT/UCalc/TAEditor.cpp" "CMakeFiles/UCalc.dir/TAEditor.cpp.o" "gcc" "CMakeFiles/UCalc.dir/TAEditor.cpp.o.d"
   "/home/danyowoj/Documents/Uni/MPT/UCalc/TComplex.cpp" "CMakeFiles/UCalc.dir/TComplex.cpp.o" "gcc" "CMakeFiles/UCalc.dir/TComplex.cpp.o.d"
+  "/home/danyowoj/Documents/Uni/MPT/UCalc/TCtrl.cpp" "CMakeFiles/UCalc.dir/TCtrl.cpp.o" "gcc" "CMakeFiles/UCalc.dir/TCtrl.cpp.o.d"
   "/home/danyowoj/Documents/Uni/MPT/UCalc/TFrac.cpp" "CMakeFiles/UCalc.dir/TFrac.cpp.o" "gcc" "CMakeFiles/UCalc.dir/TFrac.cpp.o.d"
   "/home/danyowoj/Documents/Uni/MPT/UCalc/TMemory.cpp" "CMakeFiles/UCalc.dir/TMemory.cpp.o" "gcc" "CMakeFiles/UCalc.dir/TMemory.cpp.o.d"
   "/home/danyowoj/Documents/Uni/MPT/UCalc/TPNumber.cpp" "CMakeFiles/UCalc.dir/TPNumber.cpp.o" "gcc" "CMakeFiles/UCalc.dir/TPNumber.cpp.o.d"

@@ -14,6 +14,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/UCalc.dir/TAEditor.cpp.o.d"
   "CMakeFiles/UCalc.dir/TComplex.cpp.o"
   "CMakeFiles/UCalc.dir/TComplex.cpp.o.d"
+  "CMakeFiles/UCalc.dir/TCtrl.cpp.o"
+  "CMakeFiles/UCalc.dir/TCtrl.cpp.o.d"
   "CMakeFiles/UCalc.dir/TFrac.cpp.o"
   "CMakeFiles/UCalc.dir/TFrac.cpp.o.d"
   "CMakeFiles/UCalc.dir/TMemory.cpp.o"
