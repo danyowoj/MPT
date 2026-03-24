@@ -307,3 +307,32 @@ void TCtrl::changeMode(int mode, int base)
 
     state = cStart;
 }
+
+std::string TCtrl::repeatOperation(const std::string& left, const std::string& right, TOprtn op)
+{
+    editor->setString(left);
+    TANumber* leftNum = editor->createNumber();
+    editor->setString(right);
+    TANumber* rightNum = editor->createNumber();
+
+    proc->SetLOpnd(leftNum);
+    proc->SetROpnd(rightNum);
+    proc->SetOperation(op);
+    proc->OprtnRun();
+
+    std::string result;
+    if (proc->GetError().empty()) {
+        TANumber* res = proc->GetLOpnd_Res();
+        result = res->toString();
+        editor->setString(result);
+        delete res;
+    } else {
+        result = proc->GetError();
+        editor->setString(result);
+    }
+
+    delete leftNum;
+    delete rightNum;
+    proc->ClearError();
+    return result;
+}

@@ -50,6 +50,8 @@ public:
 
     // Сменить режим (пересоздаёт компоненты)
     void changeMode(int mode, int base = 10);
+
+    std::string repeatOperation(const std::string& left, const std::string& right, TOprtn op);
 };
 
 #endif
